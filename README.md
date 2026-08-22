@@ -53,3 +53,14 @@ Demo built on Karnataka, using the Bhoomi cadastral layer, with plot boundaries 
 ## Future Scope
 
 Expand to more states as cadastral data quality allows, integrate with insurer claim management systems so flags and explanations flow into existing reviewer workflows instead of a standalone dashboard.
+
+## Team
+
+RV University, Bangalore
+
+- Nishit Patel
+- Jaineesh Patel
+- Rahul Kiran
+- Niteesh Balajee
+- Ragashree R
+- Pranav Adhikari
