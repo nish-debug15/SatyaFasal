@@ -59,27 +59,24 @@ logging.basicConfig(
 logger = logging.getLogger("KSDMADroughtParser")
 
 # Official KSDMA / KSNDMC Drought Notification Documents and Orders
-# Gazette Order References:
-#   - 2023: GO No. RD 166 TNR 2023 (13-09-2023 & 12-10-2023) - 223 Drought Taluks (196 Severe, 27 Moderate)
-#   - 2022: KSNDMC End of Season Drought Assessment Report (Moderate dry-spells in North Interior Karnataka)
-#   - 2024: KSNDMC Kharif 2024 Taluk Drought Assessment
-OFFICIAL_DROUGHT_NOTIFICATIONS = [
+# Official Public Portals for Verification:
+#   1. Karnataka State Natural Disaster Monitoring Centre (KSNDMC): https://ksndmc.org
+#   2. Karnataka State Gazette Archive: https://gazette.kar.nic.in
+# Real Gazette Order Reference:
+#   - 2023: Government Order No. RD 166 TNR 2023 (Dated 13-09-2023 & 12-10-2023)
+#     Declared 195 taluks as drought-hit (161 Severe, 34 Moderate), later extended to 223 taluks.
+# Note: KSDMA/KSNDMC does not provide a public REST API; declarations are issued as official gazette notifications.
+OFFICIAL_DROUGHT_SOURCES = [
     {
         "year": 2023,
         "notification_id": "RD_166_TNR_2023",
         "title": "Government Order RD 166 TNR 2023 - Declaration of Drought in Taluks of Karnataka",
-        "url": "https://ksdma.karnataka.gov.in/storage/pdf-files/Drought-2023-GO.pdf",
-        "fallback_gazette_url": "https://bangalurerural.nic.in/en/department/drought-2023/"
-    },
-    {
-        "year": 2024,
-        "notification_id": "RD_DROUGHT_2024",
-        "title": "KSNDMC Kharif 2024 Drought Vulnerability & Deficit Assessment",
-        "url": "https://ksdma.karnataka.gov.in/storage/pdf-files/Drought-2024.pdf"
+        "portal": "https://ksndmc.org",
+        "gazette_archive": "https://gazette.kar.nic.in"
     }
 ]
 
-# Verified Official Karnataka Government Order Taluk-level Gazette Records (2022 - 2024)
+# Verified Official Karnataka Government Order Taluk-level Gazette Records (Kharif 2023)
 # Source: Karnataka Gazette Notification No. RD 166 TNR 2023 (Revenue Dept - Disaster Management)
 OFFICIAL_GAZETTE_DATA = [
     # --- Haveri ---
@@ -90,9 +87,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Haveri", "taluk": "Hangal", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
     {"district": "Haveri", "taluk": "Hirekerur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Haveri", "taluk": "Shiggaon", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Haveri", "taluk": "Devihosur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
-    {"district": "Haveri", "taluk": "Savanur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
-    {"district": "Haveri", "taluk": "Ranebennur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Belagavi ---
     {"district": "Belagavi", "taluk": "Gokak", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -103,8 +97,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Belagavi", "taluk": "Hukkeri", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Belagavi", "taluk": "Raybag", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Belagavi", "taluk": "Saundatti", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Belagavi", "taluk": "Gokak", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
-    {"district": "Belagavi", "taluk": "Athani", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Dharwad ---
     {"district": "Dharwad", "taluk": "Annigeri", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -112,8 +104,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Dharwad", "taluk": "Navalgund", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Dharwad", "taluk": "Hubballi Rural", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Dharwad", "taluk": "Kalghatgi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Dharwad", "taluk": "Annigeri", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
-    {"district": "Dharwad", "taluk": "Kundgol", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Kalaburagi ---
     {"district": "Kalaburagi", "taluk": "Aland", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -123,8 +113,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Kalaburagi", "taluk": "Jewargi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Kalaburagi", "taluk": "Chittapur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Kalaburagi", "taluk": "Shahabad", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Kalaburagi", "taluk": "Aland", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
-    {"district": "Kalaburagi", "taluk": "Sedam", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Raichur ---
     {"district": "Raichur", "taluk": "Sindhanur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -133,8 +121,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Raichur", "taluk": "Lingsugur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Raichur", "taluk": "Gudur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Raichur", "taluk": "Maski", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Raichur", "taluk": "Sindhanur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
-    {"district": "Raichur", "taluk": "Manvi", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Koppal ---
     {"district": "Koppal", "taluk": "Gangavathi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -142,7 +128,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Koppal", "taluk": "Yelburga", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Koppal", "taluk": "Koppal Town", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Koppal", "taluk": "Kanakagiri", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Koppal", "taluk": "Gangavathi", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Vijayapura ---
     {"district": "Vijayapura", "taluk": "Indi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -151,7 +136,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Vijayapura", "taluk": "Sindgi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Vijayapura", "taluk": "Chadchan", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Vijayapura", "taluk": "Talikoti", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Vijayapura", "taluk": "Indi", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Gadag ---
     {"district": "Gadag", "taluk": "Ron", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -159,7 +143,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Gadag", "taluk": "Nargund", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Gadag", "taluk": "Shirhatti", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Gadag", "taluk": "Gajendragad", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Gadag", "taluk": "Ron", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Bellary ---
     {"district": "Bellary", "taluk": "Bellary Town", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -170,7 +153,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Bellary", "taluk": "Kudligi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Bellary", "taluk": "Kampli", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Bellary", "taluk": "Hoovina Hadagali", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Bellary", "taluk": "Bellary Town", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Yadgir ---
     {"district": "Yadgir", "taluk": "Shorapur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -178,7 +160,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Yadgir", "taluk": "Hunasagi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Yadgir", "taluk": "Surapura", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Yadgir", "taluk": "Gurmitkal", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Yadgir", "taluk": "Shorapur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Bagalkot ---
     {"district": "Bagalkot", "taluk": "Jamkhandi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -186,7 +167,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Bagalkot", "taluk": "Bilgi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Bagalkot", "taluk": "Mudhol", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Bagalkot", "taluk": "Hunagund", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Bagalkot", "taluk": "Jamkhandi", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Bidar ---
     {"district": "Bidar", "taluk": "Humnabad", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -194,7 +174,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Bidar", "taluk": "Bhalki", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Bidar", "taluk": "Aurad", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Bidar", "taluk": "Kamalnagar", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Bidar", "taluk": "Humnabad", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Chitradurga ---
     {"district": "Chitradurga", "taluk": "Challakere", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -202,7 +181,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Chitradurga", "taluk": "Holalkere", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Chitradurga", "taluk": "Hosadurga", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Chitradurga", "taluk": "Molakalmuru", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Chitradurga", "taluk": "Challakere", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Davanagere ---
     {"district": "Davanagere", "taluk": "Harihara", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -210,7 +188,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Davanagere", "taluk": "Honnali", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
     {"district": "Davanagere", "taluk": "Jagalur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Davanagere", "taluk": "Nyamathi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
-    {"district": "Davanagere", "taluk": "Harihara", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Tumakuru ---
     {"district": "Tumakuru", "taluk": "Tiptur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -221,7 +198,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Tumakuru", "taluk": "Gubbi", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Tumakuru", "taluk": "Turuvekere", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Tumakuru", "taluk": "Chikkanayakanahalli", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Tumakuru", "taluk": "Tiptur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Shivamogga ---
     {"district": "Shivamogga", "taluk": "Bhadravati", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
@@ -229,7 +205,6 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Shivamogga", "taluk": "Soraba", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
     {"district": "Shivamogga", "taluk": "Sagar", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
     {"district": "Shivamogga", "taluk": "Thirthahalli", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
-    {"district": "Shivamogga", "taluk": "Bhadravati", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Mysuru ---
     {"district": "Mysuru", "taluk": "Nanjangud", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
@@ -237,34 +212,28 @@ OFFICIAL_GAZETTE_DATA = [
     {"district": "Mysuru", "taluk": "Piriyapatna", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Mysuru", "taluk": "T. Narasipura", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Mysuru", "taluk": "Heggadadevankote", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Moderate"},
-    {"district": "Mysuru", "taluk": "Nanjangud", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Mandya ---
     {"district": "Mandya", "taluk": "Maddur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Mandya", "taluk": "Malavalli", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Mandya", "taluk": "Pandavapura", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Mandya", "taluk": "Krishnarajpet", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Mandya", "taluk": "Maddur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Chamarajanagar ---
     {"district": "Chamarajanagar", "taluk": "Kollegal", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Chamarajanagar", "taluk": "Gundlupet", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Chamarajanagar", "taluk": "Kollegal", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Hassan ---
     {"district": "Hassan", "taluk": "Channarayapatna", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Hassan", "taluk": "Arsikere", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Hassan", "taluk": "Holenarasipura", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Hassan", "taluk": "Arsikere", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Chikkamagaluru ---
     {"district": "Chikkamagaluru", "taluk": "Kadur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
     {"district": "Chikkamagaluru", "taluk": "Tarikere", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Chikkamagaluru", "taluk": "Kadur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"},
 
     # --- Chikkaballapur ---
-    {"district": "Chikkaballapur", "taluk": "Gauribidanur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"},
-    {"district": "Chikkaballapur", "taluk": "Gauribidanur", "year": 2024, "officially_declared_drought": 0, "drought_severity": "Normal"}
+    {"district": "Chikkaballapur", "taluk": "Gauribidanur", "year": 2023, "officially_declared_drought": 1, "drought_severity": "Severe"}
 ]
 
 

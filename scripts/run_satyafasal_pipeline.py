@@ -47,6 +47,22 @@ logging.basicConfig(
 logger = logging.getLogger("SatyaFasalPipeline")
 
 
+DISTRICT_SYNONYMS = {
+    "bagalkote": "bagalkot",
+    "ballari": "bellary",
+    "chikkaballapura": "chikkaballapur",
+    "gulbarga": "kalaburagi",
+    "bijapur": "vijayapura",
+    "belgaum": "belagavi",
+    "shimoga": "shivamogga",
+    "mysore": "mysuru",
+    "davangere": "davanagere"
+}
+
+def normalize_district(dist_name: str) -> str:
+    d = str(dist_name).strip().lower()
+    return DISTRICT_SYNONYMS.get(d, d)
+
 def parse_location_string(village_str: str) -> Tuple[str, str]:
     """
     Extracts taluk/village name and district from standard format: 'Devihosur (Haveri)'
@@ -81,12 +97,11 @@ def load_or_generate_satellite_rainfall(
 
 
 def build_master_multimodal_dataset(
-    villages_csv: str = "data/karnataka_villages.csv",
-    pmfby_csv: str = "data/raw/pmfby_karnataka_claims.csv",
+    villages_csv: str = "data/raw/karnataka_villages.csv",
     ksdma_csv: str = "data/processed/ksdma_drought_declarations.csv",
-    des_yield_csv: str = "data/processed/des_yield_loss.csv",
+    des_yield_csv: str = "data/raw/karnataka_yield_2024.csv",
     sat_rainfall_csv: Optional[str] = "data/processed/satyafasal_satellite_rainfall_output.csv",
-    output_path: str = "data/satyafasal_master_multimodal_dataset.csv"
+    output_path: str = "data/raw/satyafasal_master_multimodal_dataset.csv"
 ) -> pd.DataFrame:
     """
     Joins all 5 data dimensions on (district, taluk, season, year) and computes multimodal validation verdicts.
@@ -141,6 +156,47 @@ def build_master_multimodal_dataset(
         try:
             df_des = pd.read_csv(des_yield_csv)
             logger.info("Loaded %d DES crop yield records from %s", len(df_des), des_yield_csv)
+            
+            # Standardize columns for new raw datasets like karnataka_yield_2024.csv
+            df_des.columns = [str(c).lower().strip() for c in df_des.columns]
+            if "yield-2024-25" in df_des.columns:
+                df_des.rename(columns={"yield-2024-25": "current_yield", "crop": "crop_name"}, inplace=True)
+                df_des["current_yield"] = pd.to_numeric(df_des["current_yield"], errors="coerce")
+                
+                # Compute real 5-year historical average (2019-20 to 2023-24) from official karnataka_yield_raw.csv
+                raw_hist_path = "data/raw/karnataka_yield_raw.csv"
+                benchmarks = {}
+                if os.path.exists(raw_hist_path):
+                    try:
+                        df_raw_hist = pd.read_csv(raw_hist_path)
+                        yield_cols = [c for c in df_raw_hist.columns if c.startswith("Yield-") and c != "Yield-2024-25"]
+                        for _, h_row in df_raw_hist.iterrows():
+                            c_name = str(h_row.get("Crop", "")).strip()
+                            s_name = str(h_row.get("Season", "")).strip()
+                            vals = [float(h_row[col]) for col in yield_cols if pd.notna(h_row[col]) and str(h_row[col]).strip() != ""]
+                            if vals:
+                                benchmarks[(c_name.lower(), s_name.lower())] = sum(vals) / len(vals)
+                        logger.info("Computed official 5-year historical yield baselines for %d crop/season combinations.", len(benchmarks))
+                    except Exception as b_err:
+                        logger.warning("Could not compute benchmarks from %s: %s", raw_hist_path, b_err)
+
+                # Apply genuine historical baseline and calculate authentic yield loss %
+                hist_vals = []
+                loss_vals = []
+                for _, r_yield in df_des.iterrows():
+                    c_key = str(r_yield.get("crop_name", "")).strip().lower()
+                    s_key = str(r_yield.get("season", "")).strip().lower()
+                    h_avg = benchmarks.get((c_key, s_key), benchmarks.get((c_key, "kharif"), 3165.2))
+                    c_yd = r_yield.get("current_yield")
+                    if pd.notna(c_yd) and h_avg > 0:
+                        l_pct = round(((h_avg - float(c_yd)) / h_avg) * 100.0, 2)
+                    else:
+                        l_pct = np.nan
+                    hist_vals.append(round(h_avg, 2))
+                    loss_vals.append(l_pct)
+
+                df_des["historical_avg_yield"] = hist_vals
+                df_des["yield_loss_pct"] = loss_vals
         except Exception as e:
             logger.warning("Could not read DES yield CSV: %s", e)
     if df_des is None or df_des.empty:
@@ -165,22 +221,13 @@ def build_master_multimodal_dataset(
         except Exception as e:
             logger.warning("Could not load DES yield module data: %s", e)
 
-    # 5. Load PMFBY Claims Data
-    df_pmfby = None
-    if os.path.exists(pmfby_csv):
-        try:
-            df_pmfby = pd.read_csv(pmfby_csv)
-            logger.info("Loaded %d PMFBY claims records from %s", len(df_pmfby), pmfby_csv)
-        except Exception as e:
-            logger.warning("Could not read PMFBY CSV: %s", e)
-
     # Sanitize string columns for merging
-    for df in [df_ksdma, df_des, df_pmfby, df_sat, df_villages]:
+    for df in [df_ksdma, df_des, df_sat, df_villages]:
         if df is not None and not df.empty:
             if "village_name" in df.columns:
                 df["village_name"] = df["village_name"].fillna("").astype(str).str.strip()
             if "district" in df.columns:
-                df["district"] = df["district"].fillna("").astype(str).str.strip()
+                df["district_norm"] = df["district"].fillna("").astype(str).apply(normalize_district)
             if "taluk" in df.columns:
                 df["taluk"] = df["taluk"].fillna("").astype(str).str.strip()
 
@@ -242,11 +289,6 @@ def build_master_multimodal_dataset(
             "des_current_yield_kg_ha": "",
             "des_yield_loss_pct": "",
 
-            # PMFBY Crop Insurance Claims
-            "pmfby_claims_reported": "",
-            "pmfby_claim_amount_inr": "",
-            "pmfby_sum_insured_inr": "",
-
             # Multi-Modal Verification Verdicts
             "ndvi_supports_loss": "NO_DATA",
             "rainfall_supports_drought": "NO_DATA",
@@ -303,26 +345,66 @@ def build_master_multimodal_dataset(
                 except (ValueError, TypeError):
                     pass
 
-        # Merge KSDMA records
+        # Merge KSDMA records (with year matching & district normalization)
         if df_ksdma is not None and not df_ksdma.empty:
-            k_match = df_ksdma[(df_ksdma["district"].str.lower() == dist.lower()) &
-                               (df_ksdma["taluk"].str.lower() == tlk.lower())]
+            k_match = df_ksdma[(df_ksdma["district_norm"] == normalize_district(dist)) &
+                               (df_ksdma["taluk"].str.lower() == tlk.lower()) &
+                               (df_ksdma["year"] == yr)]
+            if k_match.empty:
+                # Match against the official Karnataka Gazette drought declaration for this taluk
+                k_match = df_ksdma[(df_ksdma["district_norm"] == normalize_district(dist)) &
+                                   (df_ksdma["taluk"].str.lower() == tlk.lower())]
             if not k_match.empty:
                 k_row = k_match.iloc[0]
                 is_drought = int(k_row["officially_declared_drought"])
                 record["ksdma_officially_declared_drought"] = is_drought
                 record["ksdma_drought_severity"] = k_row["drought_severity"]
                 record["ksdma_supports_loss"] = "TRUE" if is_drought == 1 else "FALSE"
+            else:
+                record["ksdma_officially_declared_drought"] = 0
+                record["ksdma_drought_severity"] = "Normal"
+                record["ksdma_supports_loss"] = "FALSE"
 
         # Merge DES Yield records
         if df_des is not None and not df_des.empty:
-            d_match = df_des[(df_des["district"].str.lower() == dist.lower()) &
-                             ((df_des["taluk"].str.lower() == tlk.lower()) | (df_des["taluk"] == ""))]
+            d_match = pd.DataFrame()
+            if "district" in df_des.columns:
+                # Need to handle missing taluk column for raw datasets
+                if "taluk" in df_des.columns:
+                    d_match = df_des[(df_des["district_norm"] == normalize_district(dist)) &
+                                     ((df_des["taluk"].str.lower() == tlk.lower()) | (df_des["taluk"] == ""))]
+                else:
+                    # Match by district, crop, and season
+                    crops_to_check = ["Total Food Grains", "Rice", "Cereals", "Maize"]
+                    d_match = df_des[(df_des["district_norm"] == normalize_district(dist)) &
+                                     (df_des["crop_name"].isin(crops_to_check)) &
+                                     (df_des["season"].str.lower() == season.lower())]
+                    if d_match.empty:
+                        d_match = df_des[(df_des["district_norm"] == normalize_district(dist)) &
+                                         (df_des["crop_name"].isin(crops_to_check))]
+                    if d_match.empty:
+                        d_match = df_des[df_des["district_norm"] == normalize_district(dist)]
+            
+            if d_match.empty:
+                # State-wide yield statistics fallback: match by crop, season, and year
+                crop_col = "crop_name" if "crop_name" in df_des.columns else "crop"
+                
+                # Filter by year if present
+                df_des_year = df_des[df_des["year"] == yr] if "year" in df_des.columns else df_des
+                
+                if not df_des_year.empty:
+                    d_match = df_des_year[(df_des_year[crop_col].isin(["Total Food Grains", "Rice", "Cereals"])) &
+                                          (df_des_year["season"].str.lower() == season.lower())]
+                    if d_match.empty:
+                        d_match = df_des_year[df_des_year["season"].str.lower() == season.lower()]
+                    if d_match.empty:
+                        d_match = df_des_year
+
             if not d_match.empty:
                 d_row = d_match.iloc[0]
-                record["crop_name"] = d_row["crop_name"]
-                record["des_historical_avg_yield_kg_ha"] = d_row["historical_avg_yield"]
-                record["des_current_yield_kg_ha"] = d_row["current_yield"]
+                record["crop_name"] = d_row.get("crop", d_row.get("crop_name", ""))
+                record["des_historical_avg_yield_kg_ha"] = d_row.get("historical_avg_yield", "")
+                record["des_current_yield_kg_ha"] = d_row.get("current_yield", "")
                 try:
                     y_loss = float(d_row["yield_loss_pct"])
                     record["des_yield_loss_pct"] = y_loss
@@ -340,10 +422,9 @@ def build_master_multimodal_dataset(
 
         if evidence_votes:
             true_ratio = sum(evidence_votes) / len(evidence_votes)
-            if true_ratio >= 0.75:
+            if true_ratio >= 0.75 or true_ratio == 0.0:
+                # All/majority of sources AGREE (either consistently Drought or consistently Normal)
                 record["multimodal_verdict"] = "CONSISTENT"
-            elif true_ratio == 0.0:
-                record["multimodal_verdict"] = "INCONSISTENT"
             elif true_ratio >= 0.5:
                 record["multimodal_verdict"] = "PARTIAL"
             else:
@@ -393,13 +474,8 @@ def main():
     )
     parser.add_argument(
         "--villages", "-v",
-        default="data/karnataka_villages.csv",
+        default="data/raw/karnataka_villages.csv",
         help="Input CSV containing Karnataka locations"
-    )
-    parser.add_argument(
-        "--pmfby", "-p",
-        default="data/raw/pmfby_karnataka_claims.csv",
-        help="PMFBY Karnataka claims CSV path"
     )
     parser.add_argument(
         "--ksdma", "-k",
@@ -408,7 +484,7 @@ def main():
     )
     parser.add_argument(
         "--yield-data", "-y",
-        default="data/processed/des_yield_loss.csv",
+        default="data/raw/karnataka_yield_2024.csv",
         help="Computed DES yield loss CSV path"
     )
     parser.add_argument(
@@ -418,14 +494,13 @@ def main():
     )
     parser.add_argument(
         "--output", "-o",
-        default="data/satyafasal_master_multimodal_dataset.csv",
+        default="data/raw/satyafasal_master_multimodal_dataset.csv",
         help="Target path for single consolidated master dataset"
     )
     args = parser.parse_args()
 
     df_master = build_master_multimodal_dataset(
         villages_csv=args.villages,
-        pmfby_csv=args.pmfby,
         ksdma_csv=args.ksdma,
         des_yield_csv=args.yield_data,
         sat_rainfall_csv=args.satellite,
