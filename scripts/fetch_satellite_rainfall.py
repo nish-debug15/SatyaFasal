@@ -12,6 +12,7 @@ import os
 import sys
 import time
 import math
+import random
 import logging
 import argparse
 import datetime
@@ -35,6 +36,46 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger("SatyaFasalDataFetcher")
+
+# --- Disk cache for successful API responses ----------------------------
+# Keyed by (sensor/kind, rounded lat, rounded lon, date(s), window_days).
+# Only successful results are ever cached - a failed/partial call is never
+# stored, so re-running never "locks in" a bad or missing value. This means
+# a PARTIAL row that succeeded on pre-loss but failed on post-loss will not
+# re-spend an API call on the pre-loss half when you retry it.
+import json
+
+CACHE_PATH = os.path.join(PROJECT_ROOT, ".satyafasal_fetch_cache.json")
+_cache: Dict[str, Any] = {}
+
+
+def _load_cache() -> None:
+    global _cache
+    if os.path.exists(CACHE_PATH):
+        try:
+            with open(CACHE_PATH, "r", encoding="utf-8") as f:
+                _cache = json.load(f)
+            logger.info("Loaded %d cached API responses from %s", len(_cache), CACHE_PATH)
+        except Exception as e:
+            logger.warning("Could not read cache file (%s). Starting with an empty cache.", e)
+            _cache = {}
+
+
+def _save_cache() -> None:
+    try:
+        with open(CACHE_PATH, "w", encoding="utf-8") as f:
+            json.dump(_cache, f)
+    except Exception as e:
+        logger.warning("Could not write cache file: %s", e)
+
+
+def _cache_get(key: str) -> Optional[Any]:
+    return _cache.get(key)
+
+
+def _cache_set(key: str, value: Any) -> None:
+    _cache[key] = value
+    _save_cache()
 
 # API Endpoints
 CDSE_TOKEN_URL = "https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token"
@@ -163,6 +204,83 @@ def retry_request(func, max_retries=3, backoff_factor=1.5, *args, **kwargs):
             raise e
 
 
+# --- Rate limiting / 429-aware retry -----------------------------------
+# The previous retry_request() only caught network-level exceptions, so a
+# 429 response (a normal, successfully-received HTTP response) was never
+# retried at all. That's the actual cause of most PARTIAL rows - not
+# cloud cover. This wraps every outbound call with:
+#   1. a minimum spacing between requests to the SAME host (so a single
+#      village doesn't fire 4-6 calls in a burst), and
+#   2. real retry-on-429/5xx with exponential backoff + jitter, honoring
+#      the Retry-After header when the server sends one.
+_last_call_by_domain: Dict[str, float] = {}
+_domain_min_interval = {
+    "copernicus": 2.0,       # Sentinel Hub Statistical API (S2 + S1)
+    "open-meteo-archive": 1.0,
+    "open-meteo-climate": 2.5,  # heaviest call (30yr daily series) - space it out more
+}
+
+
+def _throttle(domain: str) -> None:
+    min_interval = _domain_min_interval.get(domain, 1.0)
+    last = _last_call_by_domain.get(domain, 0.0)
+    elapsed = time.time() - last
+    if elapsed < min_interval:
+        time.sleep(min_interval - elapsed)
+    _last_call_by_domain[domain] = time.time()
+
+
+def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: float = 8.0):
+    """
+    Runs func() (a zero-arg callable that performs the HTTP call), paced by
+    _throttle(domain), and retries on 429 / 5xx with exponential backoff.
+    Honors the Retry-After header if the server provides one. Returns the
+    final response object (which may still carry a non-200 status if every
+    retry was exhausted - callers already handle that case downstream).
+    """
+    resp = None
+    for attempt in range(1, max_retries + 1):
+        _throttle(domain)
+        try:
+            resp = func()
+        except requests.exceptions.RequestException as e:
+            if attempt == max_retries:
+                raise e
+            wait = base_wait * attempt + random.uniform(0, 1.0)
+            logger.warning("[%s] network error (%s), retrying in %.1fs (attempt %d/%d)...",
+                           domain, e, wait, attempt, max_retries)
+            time.sleep(wait)
+            continue
+
+        if resp.status_code == 429:
+            retry_after = resp.headers.get("Retry-After")
+            if retry_after:
+                try:
+                    wait = float(retry_after) + random.uniform(0, 1.0)
+                except ValueError:
+                    wait = base_wait * attempt + random.uniform(0, 1.0)
+            else:
+                wait = base_wait * attempt + random.uniform(0, 1.0)
+            if attempt == max_retries:
+                logger.warning("[%s] still rate limited after %d attempts, giving up.", domain, max_retries)
+                return resp
+            logger.warning("[%s] rate limited (429). Waiting %.1fs before retry %d/%d...",
+                           domain, wait, attempt, max_retries)
+            time.sleep(wait)
+            continue
+
+        if resp.status_code >= 500 and attempt < max_retries:
+            wait = base_wait * attempt + random.uniform(0, 1.0)
+            logger.warning("[%s] server error %d, retrying in %.1fs (attempt %d/%d)...",
+                           domain, resp.status_code, wait, attempt, max_retries)
+            time.sleep(wait)
+            continue
+
+        return resp
+
+    return resp
+
+
 def fetch_sentinel2_stats(
     auth: CopernicusAuth,
     lat: float,
@@ -179,6 +297,12 @@ def fetch_sentinel2_stats(
         t_date = datetime.date.fromisoformat(target_date_str)
     except ValueError as e:
         return None, f"Invalid date format: {target_date_str}"
+
+    cache_key = f"s2|{round(lat, 5)}|{round(lon, 5)}|{target_date_str}|{window_days}"
+    cached = _cache_get(cache_key)
+    if cached is not None:
+        logger.info("Cache hit: S2 stats for (%.5f, %.5f) @ %s", lat, lon, target_date_str)
+        return cached, None
 
     date_from = (t_date - datetime.timedelta(days=window_days)).isoformat() + "T00:00:00Z"
     date_to = (t_date + datetime.timedelta(days=window_days)).isoformat() + "T23:59:59Z"
@@ -224,7 +348,7 @@ def fetch_sentinel2_stats(
         return requests.post(CDSE_STATS_URL, headers=headers, json=payload, timeout=40)
 
     try:
-        resp = retry_request(_do_post)
+        resp = request_with_backoff(_do_post, domain="copernicus")
         if resp.status_code != 200:
             return None, f"S2 Statistical API HTTP {resp.status_code}: {resp.text[:200]}"
 
@@ -278,11 +402,14 @@ def fetch_sentinel2_stats(
         clear_scenes = [s for s in scenes if s["cloud_pct"] <= 50.0]
         if clear_scenes:
             clear_scenes.sort(key=lambda s: (s["day_diff"], s["cloud_pct"]))
-            return clear_scenes[0], None
+            best = clear_scenes[0]
         else:
             # All scenes had > 50% cloud cover, return the least cloudy one closest to target date
             scenes.sort(key=lambda s: (s["cloud_pct"], s["day_diff"]))
-            return scenes[0], None
+            best = scenes[0]
+
+        _cache_set(cache_key, best)
+        return best, None
 
     except Exception as e:
         return None, f"S2 Fetch Exception: {str(e)}"
@@ -304,6 +431,12 @@ def fetch_sentinel1_stats(
         t_date = datetime.date.fromisoformat(target_date_str)
     except ValueError as e:
         return None, f"Invalid date format: {target_date_str}"
+
+    cache_key = f"s1|{round(lat, 5)}|{round(lon, 5)}|{target_date_str}|{window_days}"
+    cached = _cache_get(cache_key)
+    if cached is not None:
+        logger.info("Cache hit: S1 stats for (%.5f, %.5f) @ %s", lat, lon, target_date_str)
+        return cached, None
 
     date_from = (t_date - datetime.timedelta(days=window_days)).isoformat() + "T00:00:00Z"
     date_to = (t_date + datetime.timedelta(days=window_days)).isoformat() + "T23:59:59Z"
@@ -346,7 +479,7 @@ def fetch_sentinel1_stats(
         return requests.post(CDSE_STATS_URL, headers=headers, json=payload, timeout=40)
 
     try:
-        resp = retry_request(_do_post)
+        resp = request_with_backoff(_do_post, domain="copernicus")
         if resp.status_code != 200:
             return None, f"S1 Statistical API HTTP {resp.status_code}: {resp.text[:200]}"
 
@@ -391,7 +524,9 @@ def fetch_sentinel1_stats(
 
         # Pick the S1 scene closest to target date
         scenes.sort(key=lambda s: s["day_diff"])
-        return scenes[0], None
+        best = scenes[0]
+        _cache_set(cache_key, best)
+        return best, None
 
     except Exception as e:
         return None, f"S1 Fetch Exception: {str(e)}"
@@ -418,6 +553,12 @@ def fetch_rainfall_data(
     if d_sowing > d_loss_end:
         return {}, f"Sowing date {sowing_date_str} is after loss end date {loss_end_str}"
 
+    cache_key = f"rain|{round(lat, 5)}|{round(lon, 5)}|{sowing_date_str}|{loss_start_str}|{loss_end_str}"
+    cached = _cache_get(cache_key)
+    if cached is not None:
+        logger.info("Cache hit: rainfall data for (%.5f, %.5f) %s..%s", lat, lon, sowing_date_str, loss_end_str)
+        return cached, None
+
     results = {
         "actual_rainfall_total_mm": None,
         "actual_rainfall_loss_window_mm": None,
@@ -438,7 +579,7 @@ def fetch_rainfall_data(
         def _get_actual():
             return requests.get(url_actual, timeout=25)
 
-        r_act = retry_request(_get_actual)
+        r_act = request_with_backoff(_get_actual, domain="open-meteo-archive")
         if r_act.status_code == 200:
             act_json = r_act.json()
             daily_times = act_json.get("daily", {}).get("time", [])
@@ -472,7 +613,7 @@ def fetch_rainfall_data(
         def _get_climate():
             return requests.get(url_climate, timeout=35)
 
-        r_clim = retry_request(_get_climate)
+        r_clim = request_with_backoff(_get_climate, domain="open-meteo-climate")
         if r_clim.status_code == 200:
             clim_json = r_clim.json()
             c_times = clim_json.get("daily", {}).get("time", [])
@@ -522,6 +663,9 @@ def fetch_rainfall_data(
         errors.append(f"Climate normal error: {str(e)}")
 
     err_str = "; ".join(errors) if errors else None
+    if err_str is None:
+        # Only cache a fully clean result - a partial one should be retried next run.
+        _cache_set(cache_key, results)
     return results, err_str
 
 
@@ -707,6 +851,12 @@ def main():
         default=0.5,
         help="Delay in seconds between processing rows to respect rate limits (default: 0.5s)"
     )
+    parser.add_argument(
+        "--no-resume",
+        action="store_true",
+        help="Ignore any existing output file and re-fetch every row from scratch "
+             "(by default, rows already marked SUCCESS in an existing --output file are skipped)"
+    )
     args = parser.parse_args()
 
     # Load credentials
@@ -719,6 +869,7 @@ def main():
         sys.exit(1)
 
     auth = CopernicusAuth(client_id, client_secret)
+    _load_cache()
 
     # Validate input file
     if not os.path.exists(args.input):
@@ -738,51 +889,110 @@ def main():
         sys.exit(1)
 
     total_rows = len(df_in)
-    logger.info("Starting satellite and rainfall data extraction for %d locations...", total_rows)
+
+    # --- Resume support -------------------------------------------------
+    # Rows already SUCCESS in a prior run are kept as-is and skipped, so a
+    # re-run only spends API calls on the rows that were PARTIAL/FAILED.
+    prior_success: Dict[str, Dict[str, Any]] = {}
+    if not args.no_resume and os.path.exists(args.output):
+        try:
+            df_prior = pd.read_csv(args.output)
+            if "village_name" in df_prior.columns and "fetch_status" in df_prior.columns:
+                df_prior_success = df_prior[df_prior["fetch_status"] == "SUCCESS"]
+                prior_success = {
+                    row["village_name"]: row.to_dict()
+                    for _, row in df_prior_success.iterrows()
+                }
+                logger.info("Resume mode: found %d already-SUCCESS rows in existing %s, will skip re-fetching them.",
+                            len(prior_success), args.output)
+        except Exception as e:
+            logger.warning("Could not read existing output for resume (%s). Proceeding without resume.", e)
+
+    rows_to_fetch = df_in[~df_in["village_name"].isin(prior_success.keys())] if prior_success else df_in
+    logger.info("Starting satellite and rainfall data extraction for %d/%d locations (%d skipped via resume)...",
+                len(rows_to_fetch), total_rows, total_rows - len(rows_to_fetch))
     start_time = time.time()
 
-    results = []
-    success_count = 0
+    results = list(prior_success.values())
+    success_count = len(prior_success)
     partial_count = 0
     failed_count = 0
-    s1_pre_fallback_count = 0
-    s1_post_fallback_count = 0
+    s1_pre_fallback_count = sum(1 for r in prior_success.values() if r.get("s1_pre_fallback_used"))
+    s1_post_fallback_count = sum(1 for r in prior_success.values() if r.get("s1_post_fallback_used"))
 
-    for idx, row in df_in.iterrows():
-        logger.info("\n>>> Processing [%d/%d] %s", idx + 1, total_rows, row.get("village_name", ""))
-        record = process_village_row(
-            row=row,
-            auth=auth,
-            window_days=args.window_days,
-            cloud_threshold=args.cloud_threshold
-        )
-        results.append(record)
-
-        if record["fetch_status"] == "SUCCESS":
-            success_count += 1
-        elif record["fetch_status"] == "PARTIAL":
-            partial_count += 1
-        else:
-            failed_count += 1
-
-        if record["s1_pre_fallback_used"]:
-            s1_pre_fallback_count += 1
-        if record["s1_post_fallback_used"]:
-            s1_post_fallback_count += 1
-
-        # Rate-limiting pacing delay
-        if idx < total_rows - 1:
-            time.sleep(args.delay)
-
-    # Ensure output directory exists if provided
+    # Ensure output directory exists up front so checkpoint saves can land immediately
     out_dir = os.path.dirname(args.output)
     if out_dir:
         os.makedirs(out_dir, exist_ok=True)
 
-    # Save to CSV
-    df_out = pd.DataFrame(results)
-    df_out.to_csv(args.output, index=False)
+    def _checkpoint():
+        """Write current results to --output after every row, so a crash, a
+        Ctrl+C, or a dead network connection partway through never loses
+        progress - the next run just resumes from here."""
+        pd.DataFrame(results).to_csv(args.output, index=False)
+
+    fetch_rows = list(rows_to_fetch.iterrows())
+    n_fetch = len(fetch_rows)
+    interrupted = False
+    try:
+        for i, (idx, row) in enumerate(fetch_rows):
+            logger.info("\n>>> Processing [%d/%d] %s", i + 1, n_fetch, row.get("village_name", ""))
+            try:
+                record = process_village_row(
+                    row=row,
+                    auth=auth,
+                    window_days=args.window_days,
+                    cloud_threshold=args.cloud_threshold
+                )
+            except Exception as e:
+                # A single malformed row (bad date, bad coordinate, unexpected
+                # API shape, etc.) should never take down the other 99 rows.
+                logger.error("Row %s raised an unhandled error: %s. Marking FAILED and continuing.",
+                             row.get("village_name", "?"), e)
+                record = {
+                    "village_name": str(row.get("village_name", "")).strip(),
+                    "latitude": row.get("latitude"),
+                    "longitude": row.get("longitude"),
+                    "sowing_date": row.get("sowing_date"),
+                    "loss_window_start": row.get("loss_window_start"),
+                    "loss_window_end": row.get("loss_window_end"),
+                    "s1_pre_fallback_used": False,
+                    "s1_post_fallback_used": False,
+                    "fetch_status": "FAILED",
+                    "error_log": f"Unhandled exception: {e}"
+                }
+
+            results.append(record)
+
+            if record["fetch_status"] == "SUCCESS":
+                success_count += 1
+            elif record["fetch_status"] == "PARTIAL":
+                partial_count += 1
+            else:
+                failed_count += 1
+
+            if record.get("s1_pre_fallback_used"):
+                s1_pre_fallback_count += 1
+            if record.get("s1_post_fallback_used"):
+                s1_post_fallback_count += 1
+
+            _checkpoint()
+
+            # Rate-limiting pacing delay
+            if i < n_fetch - 1:
+                time.sleep(args.delay)
+    except KeyboardInterrupt:
+        interrupted = True
+        logger.warning("Interrupted by user - progress through this point is already saved to %s. "
+                        "Just re-run the same command to resume.", args.output)
+
+    # Final save (checkpoint already covers this, but be explicit)
+    _checkpoint()
     elapsed_time = time.time() - start_time
+    if interrupted:
+        print(f"\nStopped early - {len(results)}/{total_rows} rows saved to {os.path.abspath(args.output)}. "
+              f"Re-run the same command to pick up where you left off.\n")
+        return
 
     # Summary Report
     print("\n" + "=" * 65)
