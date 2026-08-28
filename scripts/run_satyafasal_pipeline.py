@@ -28,6 +28,11 @@ import argparse
 from typing import Dict, Any, List, Optional, Tuple
 
 import pandas as pd
+
+# Resolve project root (parent of scripts/ directory) so relative paths work correctly
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
+
 import numpy as np
 
 # Setup Logging

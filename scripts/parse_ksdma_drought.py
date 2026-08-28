@@ -43,6 +43,10 @@ try:
 except ImportError:
     pypdf = None
 
+# Resolve project root (parent of scripts/ directory) so relative paths work correctly
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(PROJECT_ROOT)
+
 # Setup Logging
 logging.basicConfig(
     level=logging.INFO,
