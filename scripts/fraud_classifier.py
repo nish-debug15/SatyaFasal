@@ -12,23 +12,44 @@ def classify_fraud_signal(ndvi_change: float, rainfall_deficit_pct: float, ksdma
     - ksdma_officially_declared_drought == 1: Official state government declaration of drought.
     - des_yield_loss_pct > 25.0: Significant agronomic yield loss recorded for the region.
     """
-    # Normalize inputs for missing values
-    ndvi_change = float(ndvi_change) if ndvi_change is not None else 0.0
-    rainfall_deficit_pct = float(rainfall_deficit_pct) if rainfall_deficit_pct is not None else 0.0
-    ksdma_drought = int(ksdma_officially_declared_drought) if ksdma_officially_declared_drought is not None else 0
-    yield_loss_pct = float(des_yield_loss_pct) if des_yield_loss_pct is not None else 0.0
+    # Rule 0: All data missing
+    if all(x is None for x in [ndvi_change, rainfall_deficit_pct, ksdma_officially_declared_drought, des_yield_loss_pct]):
+        return {
+            "label": "NO_DATA",
+            "confidence": "NONE",
+            "reason": "All verification signals are completely missing."
+        }
+
+    # If core NDVI is missing, we cannot verify crop loss securely
+    if ndvi_change is None:
+        return {
+            "label": "INCONCLUSIVE",
+            "confidence": "LOW",
+            "reason": "Core NDVI signal is missing. Cannot confidently evaluate crop loss."
+        }
+
+    # Parse to correct types
+    ndvi_val = float(ndvi_change)
+    rain_val = float(rainfall_deficit_pct) if rainfall_deficit_pct is not None else None
+    ksdma_val = int(ksdma_officially_declared_drought) if ksdma_officially_declared_drought is not None else None
+    yield_val = float(des_yield_loss_pct) if des_yield_loss_pct is not None else None
+
+    # Helper functions for safe comparisons with None
+    def is_leq(val, threshold): return val is not None and val <= threshold
+    def is_gt(val, threshold): return val is not None and val > threshold
+    def is_eq(val, target): return val is not None and val == target
 
     # Rule 1: No crop loss observed from space.
-    if ndvi_change > -0.05:
+    if ndvi_val > -0.05:
         return {
             "label": "MISMATCH",
             "confidence": "HIGH",
             "reason": "No significant NDVI drop observed (change > -0.05), contradicting crop loss claim."
         }
 
-    # Rule 2: Severe crop loss claimed (NDVI dropped), but absolutely zero corroborating weather/government signals.
-    if ndvi_change < -0.15:
-        if rainfall_deficit_pct <= 10.0 and ksdma_drought == 0 and yield_loss_pct <= 10.0:
+    # Rule 2: Severe crop loss claimed (NDVI dropped), but explicit evidence shows zero corroboration.
+    if ndvi_val < -0.15:
+        if is_leq(rain_val, 10.0) and is_eq(ksdma_val, 0) and is_leq(yield_val, 10.0):
             return {
                 "label": "MISMATCH",
                 "confidence": "HIGH",
@@ -36,8 +57,8 @@ def classify_fraud_signal(ndvi_change: float, rainfall_deficit_pct: float, ksdma
             }
 
     # Rule 3: Moderate/Severe NDVI drop corroborated by strong meteorological and agronomic signals.
-    if ndvi_change <= -0.10:
-        if rainfall_deficit_pct > 30.0 or ksdma_drought == 1 or yield_loss_pct > 25.0:
+    if ndvi_val <= -0.10:
+        if is_gt(rain_val, 30.0) or is_eq(ksdma_val, 1) or is_gt(yield_val, 25.0):
             return {
                 "label": "CONSISTENT",
                 "confidence": "HIGH",
@@ -48,7 +69,7 @@ def classify_fraud_signal(ndvi_change: float, rainfall_deficit_pct: float, ksdma
     return {
         "label": "INCONCLUSIVE",
         "confidence": "LOW",
-        "reason": "Signals are mixed or do not cross deterministic thresholds for confident classification."
+        "reason": "Signals are mixed, partially missing, or do not cross deterministic thresholds for confident classification."
     }
 
 if __name__ == "__main__":
