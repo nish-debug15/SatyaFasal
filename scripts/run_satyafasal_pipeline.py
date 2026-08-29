@@ -128,12 +128,8 @@ def build_master_multimodal_dataset(
         except Exception as e:
             logger.warning("Could not read KSDMA CSV: %s", e)
     if df_ksdma is None or df_ksdma.empty:
-        try:
-            from parse_ksdma_drought import OFFICIAL_GAZETTE_DATA
-            df_ksdma = pd.DataFrame(OFFICIAL_GAZETTE_DATA)
-            logger.info("Loaded %d KSDMA drought records from official module data.", len(df_ksdma))
-        except Exception as e:
-            logger.warning("Could not load KSDMA module data: %s", e)
+        logger.warning("KSDMA data source missing or empty. Marking KSDMA dimension as NO_DATA.")
+        df_ksdma = pd.DataFrame()
 
     # 4. Load DES Crop Yield Data
     df_des = None
@@ -144,26 +140,8 @@ def build_master_multimodal_dataset(
         except Exception as e:
             logger.warning("Could not read DES yield CSV: %s", e)
     if df_des is None or df_des.empty:
-        try:
-            from fetch_des_yield import OFFICIAL_DES_YIELD_RECORDS
-            des_rows = []
-            for r in OFFICIAL_DES_YIELD_RECORDS:
-                base = [r["y2018"], r["y2019"], r["y2020"], r["y2021"], r["y2022"]]
-                h_avg = sum(base) / len(base)
-                c_yd = float(r["current_yield"])
-                l_pct = ((h_avg - c_yd) / h_avg) * 100.0 if h_avg > 0 else 0.0
-                des_rows.append({
-                    "district": r["district"],
-                    "taluk": r["taluk"],
-                    "crop_name": r["crop_name"],
-                    "historical_avg_yield": round(h_avg, 2),
-                    "current_yield": round(c_yd, 2),
-                    "yield_loss_pct": round(l_pct, 2)
-                })
-            df_des = pd.DataFrame(des_rows)
-            logger.info("Computed %d DES crop yield records from official module data.", len(df_des))
-        except Exception as e:
-            logger.warning("Could not load DES yield module data: %s", e)
+        logger.warning("DES yield data missing or empty. Marking DES dimension as NO_DATA.")
+        df_des = pd.DataFrame()
 
     # 5. Load PMFBY Claims Data
     df_pmfby = None
