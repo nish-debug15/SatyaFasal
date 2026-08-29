@@ -278,6 +278,12 @@ def build_master_multimodal_dataset(
                 for src_col, dest_col in s_col_map.items():
                     if src_col in s_row and pd.notna(s_row[src_col]):
                         record[dest_col] = s_row[src_col]
+                
+                # Compute s1_fallback_used
+                pre_fb = s_row.get("s1_pre_fallback_used", False)
+                post_fb = s_row.get("s1_post_fallback_used", False)
+                if pre_fb or post_fb:
+                    record["s1_fallback_used"] = 1
 
                 # Compute ndvi_change if both present
                 try:
@@ -332,14 +338,16 @@ def build_master_multimodal_dataset(
 
         # Compute Multimodal Verdict
         # Corroborating dimensions: NDVI, Rainfall, KSDMA Drought, DES Yield Loss
-        evidence_votes = []
-        for flag in [record["ndvi_supports_loss"], record["rainfall_supports_drought"],
-                      record["ksdma_supports_loss"], record["yield_supports_loss"]]:
-            if flag in ["TRUE", "FALSE"]:
-                evidence_votes.append(flag == "TRUE")
-
-        if evidence_votes:
-            true_ratio = sum(evidence_votes) / len(evidence_votes)
+        flags = [record["ndvi_supports_loss"], record["rainfall_supports_drought"],
+                 record["ksdma_supports_loss"], record["yield_supports_loss"]]
+        
+        no_data_count = sum(1 for f in flags if f == "NO_DATA")
+        
+        if no_data_count > 1:
+            record["multimodal_verdict"] = "INCONCLUSIVE"
+        else:
+            true_votes = sum(1 for f in flags if f == "TRUE")
+            true_ratio = true_votes / len(flags)  # NO_DATA is kept in denominator (len(flags) == 4)
             if true_ratio >= 0.75:
                 record["multimodal_verdict"] = "CONSISTENT"
             elif true_ratio == 0.0:
@@ -348,8 +356,6 @@ def build_master_multimodal_dataset(
                 record["multimodal_verdict"] = "PARTIAL"
             else:
                 record["multimodal_verdict"] = "INCONSISTENT"
-        else:
-            record["multimodal_verdict"] = "INCONCLUSIVE"
 
         master_records.append(record)
 
@@ -358,13 +364,10 @@ def build_master_multimodal_dataset(
     # Convert empty strings to NaN to properly detect empty columns
     df_master.replace("", np.nan, inplace=True)
     
-    # Remove useless columns (columns that are entirely empty/NaN)
-    initial_cols = len(df_master.columns)
-    df_master.dropna(axis=1, how='all', inplace=True)
-    final_cols = len(df_master.columns)
-    
-    if initial_cols > final_cols:
-        logger.info("Removed %d useless (empty) columns from the dataset.", initial_cols - final_cols)
+    # Check for empty columns instead of dropping them silently
+    empty_cols = df_master.columns[df_master.isna().all()].tolist()
+    if empty_cols:
+        logger.warning("The following %d columns are entirely empty (NO_DATA) but were kept: %s", len(empty_cols), empty_cols)
 
     # Save output to single consolidated master dataset path
     os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)

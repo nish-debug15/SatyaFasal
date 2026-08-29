@@ -457,7 +457,11 @@ def fetch_sentinel1_stats(
             },
             "data": [
                 {
-                    "type": "sentinel-1-grd"
+                    "type": "sentinel-1-grd",
+                    "dataFilter": {
+                        "acquisitionMode": "IW",
+                        "polarization": "DV"
+                    }
                 }
             ]
         },
