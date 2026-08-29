@@ -246,7 +246,7 @@ def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: flo
         except requests.exceptions.RequestException as e:
             if attempt == max_retries:
                 raise e
-            wait = base_wait * attempt + random.uniform(0, 1.0)
+            wait = (2 ** attempt) + random.uniform(0, 1.0)
             logger.warning("[%s] network error (%s), retrying in %.1fs (attempt %d/%d)...",
                            domain, e, wait, attempt, max_retries)
             time.sleep(wait)
@@ -258,9 +258,9 @@ def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: flo
                 try:
                     wait = float(retry_after) + random.uniform(0, 1.0)
                 except ValueError:
-                    wait = base_wait * attempt + random.uniform(0, 1.0)
+                    wait = (2 ** attempt) + random.uniform(0, 1.0)
             else:
-                wait = base_wait * attempt + random.uniform(0, 1.0)
+                wait = (2 ** attempt) + random.uniform(0, 1.0)
             if attempt == max_retries:
                 logger.warning("[%s] still rate limited after %d attempts, giving up.", domain, max_retries)
                 return resp
@@ -270,7 +270,7 @@ def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: flo
             continue
 
         if resp.status_code >= 500 and attempt < max_retries:
-            wait = base_wait * attempt + random.uniform(0, 1.0)
+            wait = (2 ** attempt) + random.uniform(0, 1.0)
             logger.warning("[%s] server error %d, retrying in %.1fs (attempt %d/%d)...",
                            domain, resp.status_code, wait, attempt, max_retries)
             time.sleep(wait)
@@ -750,6 +750,9 @@ def process_village_row(
         logger.info("Triggering Sentinel-1 fallback for Pre-loss (%s)...", reason)
         out_record["s1_pre_fallback_used"] = True
         s1_pre, s1_pre_err = fetch_sentinel1_stats(auth, lat, lon, sowing_date, window_days)
+        if not s1_pre and s1_pre_err and "No Sentinel-1 acquisitions" in s1_pre_err:
+            logger.info("No S1 found with window %d. Widening to %d days...", window_days, window_days + 7)
+            s1_pre, s1_pre_err = fetch_sentinel1_stats(auth, lat, lon, sowing_date, window_days + 7)
         if s1_pre:
             out_record["s1_pre_date"] = s1_pre["date"]
             out_record["s1_pre_vv_db_mean"] = s1_pre["vv_db_mean"]
@@ -781,6 +784,9 @@ def process_village_row(
         logger.info("Triggering Sentinel-1 fallback for Post-loss (%s)...", reason)
         out_record["s1_post_fallback_used"] = True
         s1_post, s1_post_err = fetch_sentinel1_stats(auth, lat, lon, loss_end, window_days)
+        if not s1_post and s1_post_err and "No Sentinel-1 acquisitions" in s1_post_err:
+            logger.info("No S1 found with window %d. Widening to %d days...", window_days, window_days + 7)
+            s1_post, s1_post_err = fetch_sentinel1_stats(auth, lat, lon, loss_end, window_days + 7)
         if s1_post:
             out_record["s1_post_date"] = s1_post["date"]
             out_record["s1_post_vv_db_mean"] = s1_post["vv_db_mean"]

@@ -194,6 +194,7 @@ def build_master_multimodal_dataset(
             "pre_loss_ndvi": "",
             "post_loss_ndvi": "",
             "ndvi_change": "",
+            "ndvi_reliable": "",
             "pre_loss_ndwi": "",
             "post_loss_ndwi": "",
             "s2_cloud_pct_pre": "",
@@ -263,17 +264,38 @@ def build_master_multimodal_dataset(
                 if pre_fb or post_fb:
                     record["s1_fallback_used"] = 1
 
-                # Compute ndvi_change if both present
+                # Compute ndvi_reliable
                 try:
-                    pre_n = float(record["pre_loss_ndvi"])
-                    post_n = float(record["post_loss_ndvi"])
-                    record["ndvi_change"] = round(post_n - pre_n, 4)
-                    if post_n < pre_n - 0.10:
-                        record["ndvi_supports_loss"] = "TRUE"
-                    else:
-                        record["ndvi_supports_loss"] = "FALSE"
+                    c_pre = float(record["s2_cloud_pct_pre"]) if record["s2_cloud_pct_pre"] != "" else 100.0
+                    c_post = float(record["s2_cloud_pct_post"]) if record["s2_cloud_pct_post"] != "" else 100.0
+                    record["ndvi_reliable"] = (c_pre <= 50.0) and (c_post <= 50.0)
                 except (ValueError, TypeError):
-                    pass
+                    record["ndvi_reliable"] = False
+
+                # Evaluate satellite supports loss
+                if record["ndvi_reliable"]:
+                    try:
+                        pre_n = float(record["pre_loss_ndvi"])
+                        post_n = float(record["post_loss_ndvi"])
+                        record["ndvi_change"] = round(post_n - pre_n, 4)
+                        if post_n < pre_n - 0.10:
+                            record["ndvi_supports_loss"] = "TRUE"
+                        else:
+                            record["ndvi_supports_loss"] = "FALSE"
+                    except (ValueError, TypeError):
+                        pass
+                else:
+                    # Fallback to SAR evaluation
+                    try:
+                        pre_vv = float(record["s1_vv_db_pre"])
+                        post_vv = float(record["s1_vv_db_post"])
+                        # SAR drop (e.g. > 1.5 dB)
+                        if post_vv < pre_vv - 1.5:
+                            record["ndvi_supports_loss"] = "TRUE"
+                        else:
+                            record["ndvi_supports_loss"] = "FALSE"
+                    except (ValueError, TypeError):
+                        pass
 
                 # Rainfall deficit evaluation
                 try:
