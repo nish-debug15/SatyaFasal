@@ -108,13 +108,17 @@ def call_groq_api(system_prompt: str, user_prompt: str) -> tuple[str, bool]:
         "temperature": 0.3,
         "max_tokens": 200
     }
-    resp = requests.post("https://api.groq.com/openai/v1/chat/completions",
-                         headers=headers, json=payload, timeout=30)
-    if resp.status_code == 200:
-        return resp.json()["choices"][0]["message"]["content"], False
-    else:
-        # Fallback to simulated mode if API key is invalid or model fails
-        print(f"[Groq API Error] {resp.status_code}: {resp.text[:200]}")
+    try:
+        resp = requests.post("https://api.groq.com/openai/v1/chat/completions",
+                             headers=headers, json=payload, timeout=30)
+        if resp.status_code == 200:
+            return resp.json()["choices"][0]["message"]["content"], False
+        else:
+            # Fallback to simulated mode if API key is invalid or model fails
+            print(f"[Groq API Error] {resp.status_code}: {resp.text[:200]}")
+            return _simulate_explanation(user_prompt), True
+    except Exception as e:
+        print(f"[Groq API Exception] {str(e)}")
         return _simulate_explanation(user_prompt), True
 
 

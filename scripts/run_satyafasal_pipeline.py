@@ -349,10 +349,12 @@ def build_master_multimodal_dataset(
                 record["crop_name"] = d_row["crop_name"]
                 record["des_historical_avg_yield_kg_ha"] = d_row["historical_avg_yield"]
                 record["des_current_yield_kg_ha"] = d_row["current_yield"]
+                import math
                 try:
                     y_loss = float(d_row["yield_loss_pct"])
-                    record["des_yield_loss_pct"] = y_loss
-                    record["yield_supports_loss"] = "TRUE" if y_loss > 25.0 else "FALSE"
+                    if not math.isnan(y_loss):
+                        record["des_yield_loss_pct"] = y_loss
+                        record["yield_supports_loss"] = "TRUE" if y_loss > 25.0 else "FALSE"
                 except (ValueError, TypeError):
                     pass
 

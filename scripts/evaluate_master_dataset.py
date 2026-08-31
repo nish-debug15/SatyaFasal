@@ -64,15 +64,15 @@ for idx, row in df.iterrows():
     
     # 2. Explanation
     # groq_explainer takes the row dict, but it looks for multimodal_verdict instead of fraud_label.
-    # Let's ensure multimodal_verdict is used in the prompt correctly.
-    r_dict['multimodal_verdict'] = class_res['label'] 
+    # Let's just pass r_dict as is, groq_explainer prompt will use whatever multimodal_verdict is there 
     
-    explanation = generate_explanation_for_row(r_dict)
+    explanation, is_sim = generate_explanation_for_row(r_dict)
     
     r_dict['fraud_label'] = class_res['label']
     r_dict['fraud_confidence'] = class_res['confidence']
     r_dict['fraud_reason'] = class_res['reason']
     r_dict['llm_explanation'] = explanation
+    r_dict['llm_is_simulated'] = is_sim
     
     results.append(r_dict)
 

@@ -43,12 +43,13 @@ Every flag, its risk score, the triggering signals, and the explanation go to a 
 
 Demo built on Karnataka, using the Bhoomi cadastral layer, with plot boundaries verified to under 5 metre accuracy for the sample set. Runs on a curated set of real plot locations with a mix of synthetic claim narratives, some matching the satellite record and some deliberately mismatched, plus a small set of overlapping plot entries to demo duplicate detection live.
 
-## Known Limitations
+## Known Limitations & Strict Data Integrity
 
-- Cloud cover limits optical NDVI reliability for a given window, mitigated but not eliminated by the Sentinel-1 fallback
-- Duplicate detection accuracy depends on cadastral data quality, which varies by state. This build is scoped to Karnataka only
-- NDVI and rainfall can't capture every legitimate loss cause, pest attacks and localized hail damage in particular may not show up in either signal
-- This is a screening layer that narrows down what a reviewer should look at, not a replacement for field verification
+- **Strict NO_DATA Enforcement**: FasalTruth adheres to a strict "no fabrication" policy. If verifiable ground-truth data is missing or suffers from a granularity mismatch (e.g., district-level current yields compared against state-level historical baselines), the system enforces `NO_DATA` for those dimensions. For example, in our current Karnataka MVP, KSDMA drought declarations and DES historical yields were disqualified due to lack of traceable taluk-level PDFs and missing district-level history, respectively. This forces the multimodal verdict to **INCONCLUSIVE**, actively preventing the system from hallucinating confidence.
+- Cloud cover limits optical NDVI reliability for a given window, mitigated but not eliminated by the Sentinel-1 fallback.
+- Duplicate detection accuracy depends on cadastral data quality, which varies by state. This build is scoped to Karnataka only.
+- NDVI and rainfall can't capture every legitimate loss cause; pest attacks and localized hail damage in particular may not show up in either signal.
+- This is a screening layer that narrows down what a reviewer should look at, not a replacement for field verification.
 
 ## Future Scope
 
