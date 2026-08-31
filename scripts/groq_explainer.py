@@ -85,18 +85,14 @@ def generate_groq_explanation_prompt(
     )
 
 
-def call_groq_api(system_prompt: str, user_prompt: str) -> str:
+def call_groq_api(system_prompt: str, user_prompt: str) -> tuple[str, bool]:
     """
     Call the Groq API for a completion.
-    Returns the LLM response text, or a simulated response if no API key.
+    Returns (explanation_text, is_simulated).
     """
     if not GROQ_API_KEY:
-        # ---------------------------------------------------------------
         # SIMULATED MODE — No real Groq API key available.
-        # This is a KNOWN GAP flagged for the user.
-        # The prompt is fully wired; only the HTTP call is stubbed.
-        # ---------------------------------------------------------------
-        return _simulate_explanation(user_prompt)
+        return _simulate_explanation(user_prompt), True
 
     import requests
     headers = {
@@ -104,7 +100,7 @@ def call_groq_api(system_prompt: str, user_prompt: str) -> str:
         "Content-Type": "application/json"
     }
     payload = {
-        "model": "llama-3.1-8b-instant",
+        "model": "openai/gpt-oss-20b",
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
@@ -115,10 +111,11 @@ def call_groq_api(system_prompt: str, user_prompt: str) -> str:
     resp = requests.post("https://api.groq.com/openai/v1/chat/completions",
                          headers=headers, json=payload, timeout=30)
     if resp.status_code == 200:
-        return resp.json()["choices"][0]["message"]["content"]
+        return resp.json()["choices"][0]["message"]["content"], False
     else:
         # Fallback to simulated mode if API key is invalid or model fails
-        return _simulate_explanation(user_prompt)
+        print(f"[Groq API Error] {resp.status_code}: {resp.text[:200]}")
+        return _simulate_explanation(user_prompt), True
 
 
 def _simulate_explanation(user_prompt: str) -> str:
@@ -167,7 +164,7 @@ def _simulate_explanation(user_prompt: str) -> str:
                 "or unavailable for this location and time period.")
 
 
-def generate_explanation_for_row(row: dict) -> str:
+def generate_explanation_for_row(row: dict) -> tuple[str, bool]:
     """
     Convenience function: given a dict-like row from the master dataset,
     build the prompt and call the LLM (or simulator).
