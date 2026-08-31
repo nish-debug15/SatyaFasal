@@ -264,16 +264,33 @@ def build_master_multimodal_dataset(
                 if pre_fb or post_fb:
                     record["s1_fallback_used"] = 1
 
-                # Compute ndvi_reliable
-                try:
-                    c_pre = float(record["s2_cloud_pct_pre"]) if record["s2_cloud_pct_pre"] != "" else 100.0
-                    c_post = float(record["s2_cloud_pct_post"]) if record["s2_cloud_pct_post"] != "" else 100.0
-                    record["ndvi_reliable"] = (c_pre <= 50.0) and (c_post <= 50.0)
-                except (ValueError, TypeError):
-                    record["ndvi_reliable"] = False
+                # --- ndvi_reliable: read from fetch CSV if present (Phase 1 fix),
+                # --- otherwise recompute from cloud percentages for backward compat.
+                if "ndvi_reliable" in s_row and pd.notna(s_row.get("ndvi_reliable")):
+                    # The fetch script is the authoritative source for this flag
+                    raw_val = s_row["ndvi_reliable"]
+                    if isinstance(raw_val, bool):
+                        record["ndvi_reliable"] = raw_val
+                    elif isinstance(raw_val, str):
+                        record["ndvi_reliable"] = raw_val.lower() in ("true", "1")
+                    else:
+                        record["ndvi_reliable"] = bool(raw_val)
+                else:
+                    # Fallback: compute from cloud percentages (pre-Phase-1 CSVs)
+                    try:
+                        c_pre = float(record["s2_cloud_pct_pre"]) if record["s2_cloud_pct_pre"] != "" else 100.0
+                        c_post = float(record["s2_cloud_pct_post"]) if record["s2_cloud_pct_post"] != "" else 100.0
+                        record["ndvi_reliable"] = (c_pre <= 50.0) and (c_post <= 50.0)
+                    except (ValueError, TypeError):
+                        record["ndvi_reliable"] = False
 
-                # Evaluate satellite supports loss
+                # --- Evaluate satellite-based vegetation loss ---
+                # When ndvi_reliable=True: use NDVI change as evidence.
+                # When ndvi_reliable=False: NDVI is cloud-contaminated and MUST NOT
+                #   be used. Fall back to SAR VV/VH delta as the primary evidence
+                #   signal for the vegetation dimension instead.
                 if record["ndvi_reliable"]:
+                    # NDVI is trustworthy — use it directly
                     try:
                         pre_n = float(record["pre_loss_ndvi"])
                         post_n = float(record["post_loss_ndvi"])
@@ -285,16 +302,19 @@ def build_master_multimodal_dataset(
                     except (ValueError, TypeError):
                         pass
                 else:
-                    # Fallback to SAR evaluation
+                    # NDVI is UNRELIABLE (cloud-contaminated) — fall back to SAR
+                    # SAR VV delta < -1.5 dB indicates significant vegetation loss.
+                    # This is the same threshold used in fraud_classifier.py.
                     try:
                         pre_vv = float(record["s1_vv_db_pre"])
                         post_vv = float(record["s1_vv_db_post"])
-                        # SAR drop (e.g. > 1.5 dB)
-                        if post_vv < pre_vv - 1.5:
+                        sar_vv_delta = post_vv - pre_vv
+                        if sar_vv_delta < -1.5:
                             record["ndvi_supports_loss"] = "TRUE"
                         else:
                             record["ndvi_supports_loss"] = "FALSE"
                     except (ValueError, TypeError):
+                        # Neither NDVI nor SAR available — stays NO_DATA
                         pass
 
                 # Rainfall deficit evaluation
@@ -335,6 +355,15 @@ def build_master_multimodal_dataset(
                     record["yield_supports_loss"] = "TRUE" if y_loss > 25.0 else "FALSE"
                 except (ValueError, TypeError):
                     pass
+
+        # Merge PMFBY records
+        if df_pmfby is not None and not df_pmfby.empty:
+            pmfby_match = df_pmfby[df_pmfby["village_name"].str.lower() == vname.lower()]
+            if not pmfby_match.empty:
+                p_row = pmfby_match.iloc[0]
+                record["pmfby_claims_reported"] = p_row.get("pmfby_claims_reported", "")
+                record["pmfby_claim_amount_inr"] = p_row.get("pmfby_claim_amount_inr", "")
+                record["pmfby_sum_insured_inr"] = p_row.get("pmfby_sum_insured_inr", "")
 
         # Compute Multimodal Verdict
         # Corroborating dimensions: NDVI, Rainfall, KSDMA Drought, DES Yield Loss

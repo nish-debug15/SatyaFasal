@@ -35,7 +35,7 @@ Every flag, its risk score, the triggering signals, and the explanation go to a 
 - Weather data: IMD gridded rainfall data
 - Embeddings: sentence-transformers on claim narrative text, combined with structured numerical features
 - Clustering: HDBSCAN
-- Explanation generation: Groq (free tier), phrasing only, not risk determination
+- Explanation generation: Groq, phrasing only, not risk determination
 - Backend: FastAPI
 - Frontend: Next.js reviewer dashboard, deployed on Vercel free tier
 

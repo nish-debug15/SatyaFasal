@@ -237,6 +237,9 @@ def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: flo
     Honors the Retry-After header if the server provides one. Returns the
     final response object (which may still carry a non-200 status if every
     retry was exhausted - callers already handle that case downstream).
+
+    Backoff schedule: base_wait * 2^(attempt-1) + jitter
+    e.g., base_wait=2.0 → delays of ~2s, ~4s, ~8s, ~16s, ...
     """
     resp = None
     for attempt in range(1, max_retries + 1):
@@ -246,7 +249,7 @@ def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: flo
         except requests.exceptions.RequestException as e:
             if attempt == max_retries:
                 raise e
-            wait = (2 ** attempt) + random.uniform(0, 1.0)
+            wait = base_wait * (2 ** (attempt - 1)) + random.uniform(0, 1.0)
             logger.warning("[%s] network error (%s), retrying in %.1fs (attempt %d/%d)...",
                            domain, e, wait, attempt, max_retries)
             time.sleep(wait)
@@ -258,9 +261,9 @@ def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: flo
                 try:
                     wait = float(retry_after) + random.uniform(0, 1.0)
                 except ValueError:
-                    wait = (2 ** attempt) + random.uniform(0, 1.0)
+                    wait = base_wait * (2 ** (attempt - 1)) + random.uniform(0, 1.0)
             else:
-                wait = (2 ** attempt) + random.uniform(0, 1.0)
+                wait = base_wait * (2 ** (attempt - 1)) + random.uniform(0, 1.0)
             if attempt == max_retries:
                 logger.warning("[%s] still rate limited after %d attempts, giving up.", domain, max_retries)
                 return resp
@@ -270,7 +273,7 @@ def request_with_backoff(func, domain: str, max_retries: int = 6, base_wait: flo
             continue
 
         if resp.status_code >= 500 and attempt < max_retries:
-            wait = (2 ** attempt) + random.uniform(0, 1.0)
+            wait = base_wait * (2 ** (attempt - 1)) + random.uniform(0, 1.0)
             logger.warning("[%s] server error %d, retrying in %.1fs (attempt %d/%d)...",
                            domain, resp.status_code, wait, attempt, max_retries)
             time.sleep(wait)
@@ -583,7 +586,8 @@ def fetch_rainfall_data(
         def _get_actual():
             return requests.get(url_actual, timeout=25)
 
-        r_act = request_with_backoff(_get_actual, domain="open-meteo-archive")
+        # Exponential backoff retry: 2s, 4s, 8s; max 3 retries (per spec for Open-Meteo 429 errors)
+        r_act = request_with_backoff(_get_actual, domain="open-meteo-archive", max_retries=3, base_wait=2.0)
         if r_act.status_code == 200:
             act_json = r_act.json()
             daily_times = act_json.get("daily", {}).get("time", [])
@@ -617,7 +621,8 @@ def fetch_rainfall_data(
         def _get_climate():
             return requests.get(url_climate, timeout=35)
 
-        r_clim = request_with_backoff(_get_climate, domain="open-meteo-climate")
+        # Exponential backoff retry: 2s, 4s, 8s; max 3 retries (per spec for Open-Meteo 429 errors)
+        r_clim = request_with_backoff(_get_climate, domain="open-meteo-climate", max_retries=3, base_wait=2.0)
         if r_clim.status_code == 200:
             clim_json = r_clim.json()
             c_times = clim_json.get("daily", {}).get("time", [])
@@ -722,6 +727,8 @@ def process_village_row(
         "normal_rainfall_total_mm": None,
         "normal_rainfall_loss_window_mm": None,
         "rainfall_deviation_pct": None,
+        # NDVI reliability flag: False when cloud contamination makes NDVI untrustworthy
+        "ndvi_reliable": True,
         # Status & logs
         "fetch_status": "SUCCESS",
         "error_log": ""
@@ -750,9 +757,17 @@ def process_village_row(
         logger.info("Triggering Sentinel-1 fallback for Pre-loss (%s)...", reason)
         out_record["s1_pre_fallback_used"] = True
         s1_pre, s1_pre_err = fetch_sentinel1_stats(auth, lat, lon, sowing_date, window_days)
+        # Progressive window widening: try ±3, ±6, ±9 days before giving up
         if not s1_pre and s1_pre_err and "No Sentinel-1 acquisitions" in s1_pre_err:
-            logger.info("No S1 found with window %d. Widening to %d days...", window_days, window_days + 7)
-            s1_pre, s1_pre_err = fetch_sentinel1_stats(auth, lat, lon, sowing_date, window_days + 7)
+            for extra in [3, 6, 9]:
+                wider = window_days + extra
+                logger.info("No S1 pre-loss with ±%d days. Widening to ±%d days...", window_days + extra - 3, wider)
+                s1_pre, s1_pre_err = fetch_sentinel1_stats(auth, lat, lon, sowing_date, wider)
+                if s1_pre:
+                    logger.info("S1 pre-loss found after widening to ±%d days.", wider)
+                    break
+            if not s1_pre:
+                logger.warning("S1 pre-loss: STILL NO ACQUISITIONS after widening to ±%d days. Giving up.", window_days + 9)
         if s1_pre:
             out_record["s1_pre_date"] = s1_pre["date"]
             out_record["s1_pre_vv_db_mean"] = s1_pre["vv_db_mean"]
@@ -784,9 +799,17 @@ def process_village_row(
         logger.info("Triggering Sentinel-1 fallback for Post-loss (%s)...", reason)
         out_record["s1_post_fallback_used"] = True
         s1_post, s1_post_err = fetch_sentinel1_stats(auth, lat, lon, loss_end, window_days)
+        # Progressive window widening: try ±3, ±6, ±9 days before giving up
         if not s1_post and s1_post_err and "No Sentinel-1 acquisitions" in s1_post_err:
-            logger.info("No S1 found with window %d. Widening to %d days...", window_days, window_days + 7)
-            s1_post, s1_post_err = fetch_sentinel1_stats(auth, lat, lon, loss_end, window_days + 7)
+            for extra in [3, 6, 9]:
+                wider = window_days + extra
+                logger.info("No S1 post-loss with ±%d days. Widening to ±%d days...", window_days + extra - 3, wider)
+                s1_post, s1_post_err = fetch_sentinel1_stats(auth, lat, lon, loss_end, wider)
+                if s1_post:
+                    logger.info("S1 post-loss found after widening to ±%d days.", wider)
+                    break
+            if not s1_post:
+                logger.warning("S1 post-loss: STILL NO ACQUISITIONS after widening to ±%d days. Giving up.", window_days + 9)
         if s1_post:
             out_record["s1_post_date"] = s1_post["date"]
             out_record["s1_post_vv_db_mean"] = s1_post["vv_db_mean"]
@@ -796,6 +819,21 @@ def process_village_row(
         else:
             if s1_post_err:
                 errors.append(f"Post-loss S1 Fallback: {s1_post_err}")
+
+    # --- Compute NDVI reliability flag ---
+    # NDVI is unreliable (cloud-contaminated) when EITHER the pre-loss OR post-loss
+    # Sentinel-2 scene has >50% cloud cover, OR when no S2 scene was found at all.
+    # When ndvi_reliable=False, downstream consumers (fraud_classifier, pipeline)
+    # must NOT use NDVI as evidence — they should fall back to SAR VV/VH delta.
+    pre_cloud = out_record.get("s2_pre_cloud_pct")
+    post_cloud = out_record.get("s2_post_cloud_pct")
+    out_record["ndvi_reliable"] = (
+        pre_cloud is not None and post_cloud is not None
+        and pre_cloud <= cloud_threshold and post_cloud <= cloud_threshold
+    )
+    if not out_record["ndvi_reliable"]:
+        logger.info("NDVI marked UNRELIABLE: pre_cloud=%s%%, post_cloud=%s%% (threshold=%.0f%%)",
+                     pre_cloud, post_cloud, cloud_threshold)
 
     # 3. Fetch Rainfall Data (Actual & Normal)
     logger.info("Querying Rainfall Data (%s to %s)...", sowing_date, loss_end)
@@ -830,12 +868,12 @@ def main():
     )
     parser.add_argument(
         "--input", "-i",
-        default="data/karnataka_villages.csv",
+        default="data/raw/karnataka_villages.csv",
         help="Path to input CSV containing (village_name, latitude, longitude, sowing_date, loss_window_start, loss_window_end)"
     )
     parser.add_argument(
         "--output", "-o",
-        default="satyafasal_satellite_rainfall_output.csv",
+        default="data/processed/satyafasal_satellite_rainfall_output.csv",
         help="Path to output CSV for raw fetched data"
     )
     parser.add_argument(
