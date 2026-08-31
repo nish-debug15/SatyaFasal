@@ -370,6 +370,9 @@ def build_master_multimodal_dataset(
             claim_crop = "Rice"
         if not claim_season:
             claim_season = "Kharif"
+            
+        record["crop_name"] = claim_crop
+        record["season"] = claim_season
 
         # Merge DES Yield records
         if df_des is not None and not df_des.empty:
@@ -392,7 +395,6 @@ def build_master_multimodal_dataset(
                 
             if not d_match.empty:
                 d_row = d_match.iloc[0]
-                record["crop_name"] = d_row["crop_name"]
                 record["des_historical_avg_yield_kg_ha"] = d_row["historical_avg_yield"]
                 record["des_current_yield_kg_ha"] = d_row["current_yield"]
                 import math
