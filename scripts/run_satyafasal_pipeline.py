@@ -340,10 +340,45 @@ def build_master_multimodal_dataset(
                 record["ksdma_drought_severity"] = k_row["drought_severity"]
                 record["ksdma_supports_loss"] = "TRUE" if is_drought == 1 else "FALSE"
 
+        # Merge PMFBY records
+        claim_crop = None
+        claim_season = None
+        if df_pmfby is not None and not df_pmfby.empty:
+            p_match = df_pmfby[(df_pmfby["district"].str.lower() == dist.lower()) &
+                               ((df_pmfby["taluk"].str.lower() == tlk.lower()) | (df_pmfby["taluk"] == "")) &
+                               (df_pmfby["village_name"].str.lower() == vname.lower())]
+            if not p_match.empty:
+                p_row = p_match.iloc[0]
+                record["pmfby_claims_reported"] = p_row.get("pmfby_claims_reported", "")
+                record["pmfby_claim_amount_inr"] = p_row.get("pmfby_claim_amount_inr", "")
+                record["pmfby_sum_insured_inr"] = p_row.get("pmfby_sum_insured_inr", "")
+                claim_crop = p_row.get("crop_name", "Rice")
+                claim_season = p_row.get("season", "Kharif")
+        
+        if not claim_crop:
+            claim_crop = "Rice"
+        if not claim_season:
+            claim_season = "Kharif"
+
         # Merge DES Yield records
         if df_des is not None and not df_des.empty:
-            d_match = df_des[(df_des["district"].str.lower() == dist.lower()) &
-                             ((df_des["taluk"].str.lower() == tlk.lower()) | (df_des["taluk"] == ""))]
+            # First try exact match on district AND taluk
+            d_match = df_des[
+                (df_des["district"].str.lower() == dist.lower()) &
+                (df_des["taluk"].str.lower() == tlk.lower()) &
+                (df_des["crop_name"].str.lower() == claim_crop.lower()) &
+                (df_des["season"].str.lower() == claim_season.lower())
+            ]
+            
+            # If no exact taluk match, fallback to district-level aggregate (blank taluk)
+            if d_match.empty:
+                d_match = df_des[
+                    (df_des["district"].str.lower() == dist.lower()) &
+                    (df_des["taluk"] == "") &
+                    (df_des["crop_name"].str.lower() == claim_crop.lower()) &
+                    (df_des["season"].str.lower() == claim_season.lower())
+                ]
+                
             if not d_match.empty:
                 d_row = d_match.iloc[0]
                 record["crop_name"] = d_row["crop_name"]
@@ -358,14 +393,6 @@ def build_master_multimodal_dataset(
                 except (ValueError, TypeError):
                     pass
 
-        # Merge PMFBY records
-        if df_pmfby is not None and not df_pmfby.empty:
-            pmfby_match = df_pmfby[df_pmfby["village_name"].str.lower() == vname.lower()]
-            if not pmfby_match.empty:
-                p_row = pmfby_match.iloc[0]
-                record["pmfby_claims_reported"] = p_row.get("pmfby_claims_reported", "")
-                record["pmfby_claim_amount_inr"] = p_row.get("pmfby_claim_amount_inr", "")
-                record["pmfby_sum_insured_inr"] = p_row.get("pmfby_sum_insured_inr", "")
 
         # Compute Multimodal Verdict
         # Corroborating dimensions: NDVI, Rainfall, KSDMA Drought, DES Yield Loss

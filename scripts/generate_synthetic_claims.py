@@ -94,7 +94,9 @@ def generate_claims():
                 'pmfby_sum_insured_inr': sum_insured,
                 'pmfby_claim_amount_inr': claim_amount,
                 'claim_narrative': narrative,
-                'internal_test_label': test_label
+                'internal_test_label': test_label,
+                'crop_name': 'Rice',
+                'season': 'Kharif'
             })
 
     df_claims = pd.DataFrame(claims)
@@ -108,7 +110,7 @@ def generate_claims():
     df_claims.to_csv(raw_claims_path, index=False)
     
     # Aggregate for pipeline
-    df_agg = df_claims.groupby(['district', 'taluk', 'village_name']).agg(
+    df_agg = df_claims.groupby(['district', 'taluk', 'village_name', 'crop_name', 'season']).agg(
         pmfby_claims_reported=('farmer_id_hash', 'count'),
         pmfby_claim_amount_inr=('pmfby_claim_amount_inr', 'sum'),
         pmfby_sum_insured_inr=('pmfby_sum_insured_inr', 'sum')

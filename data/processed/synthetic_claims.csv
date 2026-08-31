@@ -1,258 +1,254 @@
-village_name,district,taluk,farmer_id_hash,pmfby_sum_insured_inr,pmfby_claim_amount_inr,claim_narrative,internal_test_label
-Devihosur (Haveri),Haveri,Devihosur,FMR-DED1EF81,42000,18621.27,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Devihosur (Haveri),Haveri,Devihosur,FMR-09A0F698,42000,33209.75,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Devihosur (Haveri),Haveri,Devihosur,FMR-5D6B5E8C,42000,24652.24,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Savanur (Haveri),Haveri,Savanur,FMR-844E8EF1,50000,31402.08,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Savanur (Haveri),Haveri,Savanur,FMR-3948B082,65000,34870.01,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Savanur (Haveri),Haveri,Savanur,FMR-7298AD6D,65000,33094.64,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Ramdurg (Belagavi),Belagavi,Ramdurg,FMR-61190BD7,65000,30901.11,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Athani (Belagavi),Belagavi,Athani,FMR-15EE2D1B,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Athani (Belagavi),Belagavi,Athani,FMR-0E652B1E,50000,29994.04,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Athani (Belagavi),Belagavi,Athani,FMR-BBA1DD0A,42000,33544.61,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Annigeri (Dharwad),Dharwad,Annigeri,FMR-FC2E5AF0,42000,12990.71,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Annigeri (Dharwad),Dharwad,Annigeri,FMR-2C1C9E06,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Annigeri (Dharwad),Dharwad,Annigeri,FMR-E492E594,65000,59089.58,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Annigeri (Dharwad),Dharwad,Annigeri,FMR-B5263E47,35000,29956.54,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Kundgol (Dharwad),Dharwad,Kundgol,FMR-AB77418A,50000,48503.33,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Kundgol (Dharwad),Dharwad,Kundgol,FMR-B6CE6210,65000,39407.55,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Kundgol (Dharwad),Dharwad,Kundgol,FMR-8FEB5F8A,35000,24055.3,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Kundgol (Dharwad),Dharwad,Kundgol,FMR-04D1A1EB,50000,35959.54,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Navalgund (Dharwad),Dharwad,Navalgund,FMR-24F8CBBA,35000,13831.19,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Navalgund (Dharwad),Dharwad,Navalgund,FMR-C5F2C3E5,65000,39586.13,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Navalgund (Dharwad),Dharwad,Navalgund,FMR-EEB851A7,65000,44169.64,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Aland (Kalaburagi),Kalaburagi,Aland,FMR-79B69DB8,50000,41892.65,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Chincholi (Kalaburagi),Kalaburagi,Chincholi,FMR-4BA19702,35000,18735.81,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Chincholi (Kalaburagi),Kalaburagi,Chincholi,FMR-92956599,50000,33687.32,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Chincholi (Kalaburagi),Kalaburagi,Chincholi,FMR-F41D8C4B,50000,34255.07,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Sedam (Kalaburagi),Kalaburagi,Sedam,FMR-D62324EF,65000,63693.49,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Sedam (Kalaburagi),Kalaburagi,Sedam,FMR-4C26E6CE,50000,32298.08,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Sedam (Kalaburagi),Kalaburagi,Sedam,FMR-11D291BA,42000,17763.65,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Afzalpur (Kalaburagi),Kalaburagi,Afzalpur,FMR-5083D064,50000,20517.81,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Sindhanur (Raichur),Raichur,Sindhanur,FMR-20D50E18,42000,32467.36,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Manvi (Raichur),Raichur,Manvi,FMR-455AAAFE,42000,37717.16,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Devadurga (Raichur),Raichur,Devadurga,FMR-52634E49,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Devadurga (Raichur),Raichur,Devadurga,FMR-75CA2928,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Lingsugur (Raichur),Raichur,Lingsugur,FMR-DFAD8A8C,35000,23030.46,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Gangavathi (Koppal),Koppal,Gangavathi,FMR-19EF35F2,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Gangavathi (Koppal),Koppal,Gangavathi,FMR-37A5C261,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Gangavathi (Koppal),Koppal,Gangavathi,FMR-F885953C,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Kushtagi (Koppal),Koppal,Kushtagi,FMR-445AC1F7,65000,44727.18,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Yelburga (Koppal),Koppal,Yelburga,FMR-D3323127,65000,43268.41,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Koppal Town (Koppal),Koppal,Koppal Town,FMR-24043314,65000,60386.01,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Koppal Town (Koppal),Koppal,Koppal Town,FMR-B103AD2E,50000,43749.14,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Koppal Town (Koppal),Koppal,Koppal Town,FMR-633B583F,65000,27478.01,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Indi (Vijayapura),Vijayapura,Indi,FMR-B9618E41,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Indi (Vijayapura),Vijayapura,Indi,FMR-1CA53746,35000,25096.49,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Indi (Vijayapura),Vijayapura,Indi,FMR-097E00F3,42000,22909.69,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Muddebihal (Vijayapura),Vijayapura,Muddebihal,FMR-DBF6C51B,50000,21389.28,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Muddebihal (Vijayapura),Vijayapura,Muddebihal,FMR-B0C93F68,35000,15301.95,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Basavana Bagewadi (Vijayapura),Vijayapura,Basavana Bagewadi,FMR-03BD8BE5,65000,62042.04,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Sindgi (Vijayapura),Vijayapura,Sindgi,FMR-AFB4DF97,50000,33141.21,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Sindgi (Vijayapura),Vijayapura,Sindgi,FMR-0CA24DBB,42000,18263.0,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Sindgi (Vijayapura),Vijayapura,Sindgi,FMR-11E222C1,35000,31324.22,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Ron (Gadag),Gadag,Ron,FMR-39E8703B,35000,10519.97,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Ron (Gadag),Gadag,Ron,FMR-C144A589,35000,15277.57,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Mundargi (Gadag),Gadag,Mundargi,FMR-AB751985,50000,23479.3,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Mundargi (Gadag),Gadag,Mundargi,FMR-E173F07E,50000,32820.24,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Mundargi (Gadag),Gadag,Mundargi,FMR-B1DBC48C,35000,22885.78,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Mundargi (Gadag),Gadag,Mundargi,FMR-783424CB,65000,34583.9,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Nargund (Gadag),Gadag,Nargund,FMR-7E9ECBDC,35000,26110.82,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Nargund (Gadag),Gadag,Nargund,FMR-CFE107D9,42000,14979.73,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Shirhatti (Gadag),Gadag,Shirhatti,FMR-7171697D,42000,17589.02,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Ranebennur (Haveri),Haveri,Ranebennur,FMR-F0221613,42000,13316.39,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Byadgi (Haveri),Haveri,Byadgi,FMR-2D72F70B,65000,58212.88,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Byadgi (Haveri),Haveri,Byadgi,FMR-EE1386DF,50000,21489.47,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Byadgi (Haveri),Haveri,Byadgi,FMR-2853EFF3,50000,28831.76,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Byadgi (Haveri),Haveri,Byadgi,FMR-7C07E5CA,65000,55734.08,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Hangal (Haveri),Haveri,Hangal,FMR-43E307E8,50000,17561.86,Crop dried up due to prolonged moisture stress.,CONTRADICT_REALITY_HEALTHY
-Hirekerur (Haveri),Haveri,Hirekerur,FMR-4DEBB755,42000,41440.97,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Hirekerur (Haveri),Haveri,Hirekerur,FMR-75678495,50000,26811.6,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Hirekerur (Haveri),Haveri,Hirekerur,FMR-C065E51E,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Bellary Town (Bellary),Bellary,Bellary Town,FMR-BF5E9217,42000,28354.99,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Bellary Town (Bellary),Bellary,Bellary Town,FMR-C39E6B71,35000,30891.12,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Hospet (Bellary),Bellary,Hospet,FMR-30DFC20B,35000,31280.42,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Hospet (Bellary),Bellary,Hospet,FMR-B3472F2C,65000,27005.22,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Hospet (Bellary),Bellary,Hospet,FMR-BC02C9CF,42000,20813.56,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Hospet (Bellary),Bellary,Hospet,FMR-9E780EBD,50000,34803.41,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Sandur (Bellary),Bellary,Sandur,FMR-1341F1AD,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Sandur (Bellary),Bellary,Sandur,FMR-8B6E88FF,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Sandur (Bellary),Bellary,Sandur,FMR-EBCB788E,65000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Siruguppa (Bellary),Bellary,Siruguppa,FMR-3D60C55A,42000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Siruguppa (Bellary),Bellary,Siruguppa,FMR-ACE9767B,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Shorapur (Yadgir),Yadgir,Shorapur,FMR-2411C92D,50000,49801.12,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Shorapur (Yadgir),Yadgir,Shorapur,FMR-1F6A5BB1,65000,55752.76,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Shahapur (Yadgir),Yadgir,Shahapur,FMR-72ECA344,50000,25770.3,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Shahapur (Yadgir),Yadgir,Shahapur,FMR-21B7021E,65000,60471.36,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Hunasagi (Yadgir),Yadgir,Hunasagi,FMR-51BE32E9,42000,25417.26,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Hunasagi (Yadgir),Yadgir,Hunasagi,FMR-D7201284,50000,46743.68,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Hunasagi (Yadgir),Yadgir,Hunasagi,FMR-B7D0B5B9,50000,43929.8,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Hunasagi (Yadgir),Yadgir,Hunasagi,FMR-4B25DCFC,35000,18517.7,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Surapura (Yadgir),Yadgir,Surapura,FMR-891F1FBD,65000,34482.52,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Jamkhandi (Bagalkot),Bagalkot,Jamkhandi,FMR-1ED28C02,65000,27871.45,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Jamkhandi (Bagalkot),Bagalkot,Jamkhandi,FMR-81557F3E,35000,19650.83,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Badami (Bagalkot),Bagalkot,Badami,FMR-9481DE3E,65000,42598.62,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Bilgi (Bagalkot),Bagalkot,Bilgi,FMR-C6FB6961,50000,22731.37,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Mudhol (Bagalkot),Bagalkot,Mudhol,FMR-B8E119DF,35000,29598.25,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Mudhol (Bagalkot),Bagalkot,Mudhol,FMR-ECE15217,50000,38440.86,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Shiggaon (Haveri),Haveri,Shiggaon,FMR-5E27A65C,50000,48636.14,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Shiggaon (Haveri),Haveri,Shiggaon,FMR-1E44FC15,35000,24827.71,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Shiggaon (Haveri),Haveri,Shiggaon,FMR-16336BD8,35000,13770.34,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Shiggaon (Haveri),Haveri,Shiggaon,FMR-6C4D99CA,65000,20062.74,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Hagaribommanahalli (Bellary),Bellary,Hagaribommanahalli,FMR-2CF470DF,42000,19503.63,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Hagaribommanahalli (Bellary),Bellary,Hagaribommanahalli,FMR-8F27033A,35000,22012.57,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Kudligi (Bellary),Bellary,Kudligi,FMR-6A7548CF,42000,40086.09,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Kudligi (Bellary),Bellary,Kudligi,FMR-4B1D7A90,35000,21446.77,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Kudligi (Bellary),Bellary,Kudligi,FMR-0FCA10B4,42000,23946.9,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Kampli (Bellary),Bellary,Kampli,FMR-BFBE435F,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Kampli (Bellary),Bellary,Kampli,FMR-486B8D83,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Kampli (Bellary),Bellary,Kampli,FMR-EC11BE7B,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Humnabad (Bidar),Bidar,Humnabad,FMR-6B6A1E90,42000,40990.66,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Humnabad (Bidar),Bidar,Humnabad,FMR-F663C0CD,42000,26535.59,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Humnabad (Bidar),Bidar,Humnabad,FMR-E3320F9E,42000,33957.88,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Basavakalyan (Bidar),Bidar,Basavakalyan,FMR-2BBCA40C,50000,17112.55,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Basavakalyan (Bidar),Bidar,Basavakalyan,FMR-CB58D8C2,35000,29328.64,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Basavakalyan (Bidar),Bidar,Basavakalyan,FMR-9BDFCB42,50000,22208.59,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Basavakalyan (Bidar),Bidar,Basavakalyan,FMR-4A67818D,65000,63998.03,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Bhalki (Bidar),Bidar,Bhalki,FMR-ECE89D50,50000,43706.43,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Bhalki (Bidar),Bidar,Bhalki,FMR-1E68C8AE,65000,35173.66,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Bhalki (Bidar),Bidar,Bhalki,FMR-1A1FF14D,35000,15525.01,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Bhalki (Bidar),Bidar,Bhalki,FMR-A390ECA0,42000,25346.73,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Aurad (Bidar),Bidar,Aurad,FMR-3BBABF5D,35000,34197.92,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Aurad (Bidar),Bidar,Aurad,FMR-4E35ED97,65000,19569.45,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Aurad (Bidar),Bidar,Aurad,FMR-FD309084,50000,24487.75,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Aurad (Bidar),Bidar,Aurad,FMR-22D828CC,35000,19136.8,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Hoovina Hadagali (Bellary),Bellary,Hoovina Hadagali,FMR-9505778E,50000,33969.2,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Hoovina Hadagali (Bellary),Bellary,Hoovina Hadagali,FMR-C9FCA8B4,42000,30868.12,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Hoovina Hadagali (Bellary),Bellary,Hoovina Hadagali,FMR-1E43D260,65000,44624.14,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Gudur (Raichur),Raichur,Gudur,FMR-849E7756,42000,34852.55,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Gudur (Raichur),Raichur,Gudur,FMR-B6E92587,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Gudur (Raichur),Raichur,Gudur,FMR-1C718800,65000,27216.54,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Maski (Raichur),Raichur,Maski,FMR-253F6DA7,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Maski (Raichur),Raichur,Maski,FMR-D226AB57,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Challakere (Chitradurga),Chitradurga,Challakere,FMR-121B64EF,50000,44391.23,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Challakere (Chitradurga),Chitradurga,Challakere,FMR-3CC5B852,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Challakere (Chitradurga),Chitradurga,Challakere,FMR-005BADC0,42000,22575.95,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Challakere (Chitradurga),Chitradurga,Challakere,FMR-1620EF91,50000,16217.12,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Hiriyur (Chitradurga),Chitradurga,Hiriyur,FMR-38DD3952,35000,15067.57,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Hiriyur (Chitradurga),Chitradurga,Hiriyur,FMR-12BE3994,35000,34157.61,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Hiriyur (Chitradurga),Chitradurga,Hiriyur,FMR-7B7F761A,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Holalkere (Chitradurga),Chitradurga,Holalkere,FMR-1A2BADC2,65000,58866.14,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Holalkere (Chitradurga),Chitradurga,Holalkere,FMR-3C695800,42000,15302.39,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Hosadurga (Chitradurga),Chitradurga,Hosadurga,FMR-012E32C2,65000,52835.14,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Hosadurga (Chitradurga),Chitradurga,Hosadurga,FMR-B1DDB1C9,65000,30997.11,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Hosadurga (Chitradurga),Chitradurga,Hosadurga,FMR-BBB3DFC7,42000,36571.54,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Hosadurga (Chitradurga),Chitradurga,Hosadurga,FMR-EF385781,35000,11393.27,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Molakalmuru (Chitradurga),Chitradurga,Molakalmuru,FMR-159D1ADB,42000,20015.14,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY
-Harihara (Davanagere),Davanagere,Harihara,FMR-8BE0139D,50000,27504.32,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Harihara (Davanagere),Davanagere,Harihara,FMR-EC7DCC73,50000,17893.44,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Channagiri (Davanagere),Davanagere,Channagiri,FMR-A1A1D16C,42000,23656.59,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Honnali (Davanagere),Davanagere,Honnali,FMR-6DA40E3A,50000,37112.57,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY
-Honnali (Davanagere),Davanagere,Honnali,FMR-3579C5EC,50000,30481.24,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Honnali (Davanagere),Davanagere,Honnali,FMR-121A4770,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Honnali (Davanagere),Davanagere,Honnali,FMR-C5568D1E,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Jagalur (Davanagere),Davanagere,Jagalur,FMR-B6914087,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Jagalur (Davanagere),Davanagere,Jagalur,FMR-A870356E,50000,26687.38,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY
-Nyamathi (Davanagere),Davanagere,Nyamathi,FMR-98CA182F,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Nyamathi (Davanagere),Davanagere,Nyamathi,FMR-6BE09B61,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Tiptur (Tumakuru),Tumakuru,Tiptur,FMR-887589CB,42000,29189.06,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Tiptur (Tumakuru),Tumakuru,Tiptur,FMR-B97E9513,50000,49479.57,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Kunigal (Tumakuru),Tumakuru,Kunigal,FMR-4ADC336A,35000,11849.25,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Kunigal (Tumakuru),Tumakuru,Kunigal,FMR-BB7EBCFC,42000,39822.53,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Kunigal (Tumakuru),Tumakuru,Kunigal,FMR-C8974418,42000,27735.74,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Madhugiri (Tumakuru),Tumakuru,Madhugiri,FMR-5BBE5A0B,42000,39811.35,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Sira (Tumakuru),Tumakuru,Sira,FMR-6A8B8069,42000,13500.08,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Sira (Tumakuru),Tumakuru,Sira,FMR-ACDE0AB3,35000,11414.33,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Sira (Tumakuru),Tumakuru,Sira,FMR-9A8EF70A,50000,20391.77,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Pavagada (Tumakuru),Tumakuru,Pavagada,FMR-67E4E740,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Gubbi (Tumakuru),Tumakuru,Gubbi,FMR-4A37909D,50000,22104.18,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Gubbi (Tumakuru),Tumakuru,Gubbi,FMR-BFC9B63F,50000,36208.22,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Gubbi (Tumakuru),Tumakuru,Gubbi,FMR-04FAADDD,42000,15140.73,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-BBBAEC7C,65000,48726.22,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-3A879BB4,42000,18081.56,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-FF0660A7,42000,33419.71,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-E6A5A276,35000,11747.21,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Chikkanayakanahalli (Tumakuru),Tumakuru,Chikkanayakanahalli,FMR-08D4E133,50000,30365.97,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Chikkanayakanahalli (Tumakuru),Tumakuru,Chikkanayakanahalli,FMR-147E6620,50000,19789.0,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Chikkanayakanahalli (Tumakuru),Tumakuru,Chikkanayakanahalli,FMR-DB8EEAB1,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Chikkanayakanahalli (Tumakuru),Tumakuru,Chikkanayakanahalli,FMR-7BF2A6AF,42000,18268.95,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Bhadravati (Shivamogga),Shivamogga,Bhadravati,FMR-038643A5,50000,31310.04,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Bhadravati (Shivamogga),Shivamogga,Bhadravati,FMR-39B2554D,42000,39995.21,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Shikaripura (Shivamogga),Shivamogga,Shikaripura,FMR-CB887C76,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Shikaripura (Shivamogga),Shivamogga,Shikaripura,FMR-C9D6EA17,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Shikaripura (Shivamogga),Shivamogga,Shikaripura,FMR-00539999,65000,54211.9,Crop dried up due to prolonged moisture stress.,CONTRADICT_REALITY_HEALTHY
-Shikaripura (Shivamogga),Shivamogga,Shikaripura,FMR-5982FBCF,50000,15762.82,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY
-Soraba (Shivamogga),Shivamogga,Soraba,FMR-CB1544CD,35000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Soraba (Shivamogga),Shivamogga,Soraba,FMR-66E9B0C4,42000,35167.29,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Soraba (Shivamogga),Shivamogga,Soraba,FMR-4DB1F6B9,42000,20925.4,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Soraba (Shivamogga),Shivamogga,Soraba,FMR-4408D173,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Sagar (Shivamogga),Shivamogga,Sagar,FMR-2F62FF61,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Thirthahalli (Shivamogga),Shivamogga,Thirthahalli,FMR-8137D13F,65000,41868.46,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Thirthahalli (Shivamogga),Shivamogga,Thirthahalli,FMR-3D0DEB7C,50000,19481.13,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY
-Thirthahalli (Shivamogga),Shivamogga,Thirthahalli,FMR-3996FF81,35000,32680.82,Crop dried up due to prolonged moisture stress.,CONTRADICT_REALITY_HEALTHY
-Thirthahalli (Shivamogga),Shivamogga,Thirthahalli,FMR-C332FF79,42000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Nanjangud (Mysuru),Mysuru,Nanjangud,FMR-12C74E0E,42000,37186.85,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Nanjangud (Mysuru),Mysuru,Nanjangud,FMR-D676B5CE,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS
-Nanjangud (Mysuru),Mysuru,Nanjangud,FMR-16DAD465,65000,23255.96,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Hunsur (Mysuru),Mysuru,Hunsur,FMR-5DEAEF46,65000,41742.28,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Piriyapatna (Mysuru),Mysuru,Piriyapatna,FMR-BD31B7D2,35000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-T. Narasipura (Mysuru),Mysuru,T. Narasipura,FMR-30BE3936,42000,27648.08,"No rain for 30 days, total crop failure.",MATCH_LOSS
-T. Narasipura (Mysuru),Mysuru,T. Narasipura,FMR-456DBF6A,50000,19492.72,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-T. Narasipura (Mysuru),Mysuru,T. Narasipura,FMR-1C9F5F3E,42000,18996.22,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS
-Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-B7337920,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-F0C75152,42000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-8EAFD85C,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-EC3DD879,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Maddur (Mandya),Mandya,Maddur,FMR-F5C45FF6,50000,20843.9,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Maddur (Mandya),Mandya,Maddur,FMR-BE778DCD,50000,18635.27,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Maddur (Mandya),Mandya,Maddur,FMR-713BF933,42000,24879.68,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Maddur (Mandya),Mandya,Maddur,FMR-0CB4A53F,42000,19314.32,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Malavalli (Mandya),Mandya,Malavalli,FMR-C8044310,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Malavalli (Mandya),Mandya,Malavalli,FMR-51E42D25,42000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Malavalli (Mandya),Mandya,Malavalli,FMR-5523EFF5,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Malavalli (Mandya),Mandya,Malavalli,FMR-2EFECD51,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Pandavapura (Mandya),Mandya,Pandavapura,FMR-3E82A477,35000,20314.75,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Pandavapura (Mandya),Mandya,Pandavapura,FMR-06E0A04A,50000,45534.68,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Pandavapura (Mandya),Mandya,Pandavapura,FMR-5FF7F33B,65000,28888.56,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Pandavapura (Mandya),Mandya,Pandavapura,FMR-D933019C,65000,29693.24,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Krishnarajpet (Mandya),Mandya,Krishnarajpet,FMR-A9BBC449,35000,21929.69,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Krishnarajpet (Mandya),Mandya,Krishnarajpet,FMR-7C4E3224,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Kollegal (Chamarajanagar),Chamarajanagar,Kollegal,FMR-2B7A026C,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Kollegal (Chamarajanagar),Chamarajanagar,Kollegal,FMR-5A802058,35000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Kollegal (Chamarajanagar),Chamarajanagar,Kollegal,FMR-E6E52C6E,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Gundlupet (Chamarajanagar),Chamarajanagar,Gundlupet,FMR-B2221753,65000,55252.52,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY
-Channarayapatna (Hassan),Hassan,Channarayapatna,FMR-4687F285,35000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Channarayapatna (Hassan),Hassan,Channarayapatna,FMR-82A0DAE3,42000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Channarayapatna (Hassan),Hassan,Channarayapatna,FMR-3C330F3F,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Arsikere (Hassan),Hassan,Arsikere,FMR-95C7F0EB,50000,26953.41,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Arsikere (Hassan),Hassan,Arsikere,FMR-B61BA613,35000,30872.29,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Arsikere (Hassan),Hassan,Arsikere,FMR-07852515,50000,16981.48,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Holenarasipura (Hassan),Hassan,Holenarasipura,FMR-B5BDB322,42000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Holenarasipura (Hassan),Hassan,Holenarasipura,FMR-3F077365,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Holenarasipura (Hassan),Hassan,Holenarasipura,FMR-8CDC8CD1,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Holenarasipura (Hassan),Hassan,Holenarasipura,FMR-C9693301,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Kadur (Chikkamagaluru),Chikkamagaluru,Kadur,FMR-E9230295,35000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Kadur (Chikkamagaluru),Chikkamagaluru,Kadur,FMR-D7FD9809,35000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Kadur (Chikkamagaluru),Chikkamagaluru,Kadur,FMR-CFE1F5A7,35000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY
-Kadur (Chikkamagaluru),Chikkamagaluru,Kadur,FMR-7F3CBEB3,42000,32701.27,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY
-Tarikere (Chikkamagaluru),Chikkamagaluru,Tarikere,FMR-64F0F0A9,50000,36087.1,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Gauribidanur (Chikkaballapur),Chikkaballapur,Gauribidanur,FMR-5915C398,50000,28251.44,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Gauribidanur (Chikkaballapur),Chikkaballapur,Gauribidanur,FMR-90A2A09A,35000,27052.02,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Gauribidanur (Chikkaballapur),Chikkaballapur,Gauribidanur,FMR-C68AF6D2,50000,24316.97,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Gauribidanur (Chikkaballapur),Chikkaballapur,Gauribidanur,FMR-C3169FE7,35000,33336.56,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Gokak (Belagavi),Belagavi,Gokak,FMR-24A2EA61,65000,26512.65,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Gokak (Belagavi),Belagavi,Gokak,FMR-4027B55B,50000,36657.86,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY
-Gokak (Belagavi),Belagavi,Gokak,FMR-5E37E8DC,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY
-Gokak (Belagavi),Belagavi,Gokak,FMR-DA6129DE,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY
-Hubballi Rural (Dharwad),Dharwad,Hubballi Rural,FMR-E8134589,65000,59513.48,Crop dried up due to prolonged moisture stress.,MATCH_LOSS
-Hubballi Rural (Dharwad),Dharwad,Hubballi Rural,FMR-F7F4970C,35000,28306.39,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Hubballi Rural (Dharwad),Dharwad,Hubballi Rural,FMR-73E77597,42000,22933.42,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Kalghatgi (Dharwad),Dharwad,Kalghatgi,FMR-059439AC,35000,16962.76,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Kalghatgi (Dharwad),Dharwad,Kalghatgi,FMR-11FE73C8,42000,31348.99,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS
-Kalghatgi (Dharwad),Dharwad,Kalghatgi,FMR-43593142,35000,17480.06,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Kalghatgi (Dharwad),Dharwad,Kalghatgi,FMR-2F67A2E4,50000,27297.54,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS
-Jewargi (Kalaburagi),Kalaburagi,Jewargi,FMR-9CCFE370,50000,43326.69,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Chittapur (Kalaburagi),Kalaburagi,Chittapur,FMR-96515847,42000,21730.84,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
-Chittapur (Kalaburagi),Kalaburagi,Chittapur,FMR-728A2205,65000,33815.49,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS
-Chittapur (Kalaburagi),Kalaburagi,Chittapur,FMR-DFC94596,35000,27423.79,Severe drought during flowering stage destroyed crop.,MATCH_LOSS
-Shahabad (Kalaburagi),Kalaburagi,Shahabad,FMR-881CC8E0,50000,39146.86,"No rain for 30 days, total crop failure.",MATCH_LOSS
-Shahabad (Kalaburagi),Kalaburagi,Shahabad,FMR-48762358,42000,20425.26,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS
+village_name,district,taluk,farmer_id_hash,pmfby_sum_insured_inr,pmfby_claim_amount_inr,claim_narrative,internal_test_label,crop_name,season
+Devihosur (Haveri),Haveri,Devihosur,FMR-DED1EF81,50000,24405.84,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Devihosur (Haveri),Haveri,Devihosur,FMR-09A0F698,50000,18666.32,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Devihosur (Haveri),Haveri,Devihosur,FMR-5D6B5E8C,65000,35494.92,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Savanur (Haveri),Haveri,Savanur,FMR-844E8EF1,42000,20240.59,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Savanur (Haveri),Haveri,Savanur,FMR-3948B082,35000,16138.31,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Savanur (Haveri),Haveri,Savanur,FMR-7298AD6D,50000,16664.67,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Ramdurg (Belagavi),Belagavi,Ramdurg,FMR-61190BD7,50000,39004.43,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Athani (Belagavi),Belagavi,Athani,FMR-15EE2D1B,50000,39963.98,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Athani (Belagavi),Belagavi,Athani,FMR-0E652B1E,35000,26887.46,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Athani (Belagavi),Belagavi,Athani,FMR-BBA1DD0A,65000,54383.27,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Annigeri (Dharwad),Dharwad,Annigeri,FMR-FC2E5AF0,50000,28108.28,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Kundgol (Dharwad),Dharwad,Kundgol,FMR-AB77418A,50000,15177.77,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Kundgol (Dharwad),Dharwad,Kundgol,FMR-B6CE6210,65000,23215.73,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Kundgol (Dharwad),Dharwad,Kundgol,FMR-8FEB5F8A,42000,18737.2,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Navalgund (Dharwad),Dharwad,Navalgund,FMR-24F8CBBA,42000,24756.31,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Navalgund (Dharwad),Dharwad,Navalgund,FMR-C5F2C3E5,42000,30941.41,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Navalgund (Dharwad),Dharwad,Navalgund,FMR-EEB851A7,50000,40964.12,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Navalgund (Dharwad),Dharwad,Navalgund,FMR-709DC81C,50000,47232.13,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Aland (Kalaburagi),Kalaburagi,Aland,FMR-79B69DB8,65000,56857.06,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Aland (Kalaburagi),Kalaburagi,Aland,FMR-DD7A2E46,35000,31299.76,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Aland (Kalaburagi),Kalaburagi,Aland,FMR-FD8F2C05,42000,40603.4,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Chincholi (Kalaburagi),Kalaburagi,Chincholi,FMR-4BA19702,65000,24952.34,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Chincholi (Kalaburagi),Kalaburagi,Chincholi,FMR-92956599,42000,40903.58,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Sedam (Kalaburagi),Kalaburagi,Sedam,FMR-D62324EF,50000,21490.37,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Sedam (Kalaburagi),Kalaburagi,Sedam,FMR-4C26E6CE,50000,48244.87,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Sedam (Kalaburagi),Kalaburagi,Sedam,FMR-11D291BA,42000,38449.87,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Afzalpur (Kalaburagi),Kalaburagi,Afzalpur,FMR-5083D064,42000,35645.17,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Afzalpur (Kalaburagi),Kalaburagi,Afzalpur,FMR-7D203B86,42000,36078.7,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Afzalpur (Kalaburagi),Kalaburagi,Afzalpur,FMR-49B834D3,50000,43986.81,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Afzalpur (Kalaburagi),Kalaburagi,Afzalpur,FMR-51A93D38,35000,28317.67,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Sindhanur (Raichur),Raichur,Sindhanur,FMR-20D50E18,50000,25356.68,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Manvi (Raichur),Raichur,Manvi,FMR-455AAAFE,42000,34294.2,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Manvi (Raichur),Raichur,Manvi,FMR-AB6C2AFF,65000,47033.24,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Devadurga (Raichur),Raichur,Devadurga,FMR-52634E49,42000,40845.36,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Devadurga (Raichur),Raichur,Devadurga,FMR-75CA2928,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Devadurga (Raichur),Raichur,Devadurga,FMR-784ACB80,50000,18620.86,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Devadurga (Raichur),Raichur,Devadurga,FMR-0420E0CB,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Lingsugur (Raichur),Raichur,Lingsugur,FMR-DFAD8A8C,65000,36843.55,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Gangavathi (Koppal),Koppal,Gangavathi,FMR-19EF35F2,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Gangavathi (Koppal),Koppal,Gangavathi,FMR-37A5C261,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Gangavathi (Koppal),Koppal,Gangavathi,FMR-F885953C,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Gangavathi (Koppal),Koppal,Gangavathi,FMR-833A6BE6,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Kushtagi (Koppal),Koppal,Kushtagi,FMR-445AC1F7,65000,61272.84,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Kushtagi (Koppal),Koppal,Kushtagi,FMR-6A31E2AF,50000,21544.89,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Yelburga (Koppal),Koppal,Yelburga,FMR-D3323127,42000,34214.41,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Yelburga (Koppal),Koppal,Yelburga,FMR-D89AB0F6,35000,24141.04,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Yelburga (Koppal),Koppal,Yelburga,FMR-B5E933D5,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Koppal Town (Koppal),Koppal,Koppal Town,FMR-24043314,42000,31563.54,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Koppal Town (Koppal),Koppal,Koppal Town,FMR-B103AD2E,35000,11313.62,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Koppal Town (Koppal),Koppal,Koppal Town,FMR-633B583F,65000,63189.47,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Koppal Town (Koppal),Koppal,Koppal Town,FMR-438DF56A,50000,28914.33,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Indi (Vijayapura),Vijayapura,Indi,FMR-B9618E41,42000,31181.3,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Indi (Vijayapura),Vijayapura,Indi,FMR-1CA53746,50000,37198.42,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Indi (Vijayapura),Vijayapura,Indi,FMR-097E00F3,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Indi (Vijayapura),Vijayapura,Indi,FMR-281E5431,42000,37122.05,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Muddebihal (Vijayapura),Vijayapura,Muddebihal,FMR-DBF6C51B,50000,30045.56,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Basavana Bagewadi (Vijayapura),Vijayapura,Basavana Bagewadi,FMR-03BD8BE5,35000,21835.15,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Basavana Bagewadi (Vijayapura),Vijayapura,Basavana Bagewadi,FMR-CB5C6470,65000,30232.87,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Basavana Bagewadi (Vijayapura),Vijayapura,Basavana Bagewadi,FMR-88717290,35000,30129.81,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Sindgi (Vijayapura),Vijayapura,Sindgi,FMR-AFB4DF97,50000,39801.57,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Ron (Gadag),Gadag,Ron,FMR-39E8703B,50000,28966.6,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Ron (Gadag),Gadag,Ron,FMR-C144A589,35000,30067.15,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Ron (Gadag),Gadag,Ron,FMR-622E6DF2,65000,37549.41,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Mundargi (Gadag),Gadag,Mundargi,FMR-AB751985,65000,41405.5,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Mundargi (Gadag),Gadag,Mundargi,FMR-E173F07E,35000,28391.92,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Mundargi (Gadag),Gadag,Mundargi,FMR-B1DBC48C,65000,55381.8,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Mundargi (Gadag),Gadag,Mundargi,FMR-783424CB,35000,17611.24,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Nargund (Gadag),Gadag,Nargund,FMR-7E9ECBDC,50000,31471.67,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Nargund (Gadag),Gadag,Nargund,FMR-CFE107D9,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Nargund (Gadag),Gadag,Nargund,FMR-6EB97A29,35000,26918.96,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Shirhatti (Gadag),Gadag,Shirhatti,FMR-7171697D,35000,29520.16,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Shirhatti (Gadag),Gadag,Shirhatti,FMR-0B2D4985,50000,35241.28,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Shirhatti (Gadag),Gadag,Shirhatti,FMR-9C229D11,65000,20747.68,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Shirhatti (Gadag),Gadag,Shirhatti,FMR-59A6FF92,50000,15190.18,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Ranebennur (Haveri),Haveri,Ranebennur,FMR-F0221613,35000,12515.46,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Ranebennur (Haveri),Haveri,Ranebennur,FMR-DFE49854,35000,16996.67,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Byadgi (Haveri),Haveri,Byadgi,FMR-2D72F70B,50000,37649.35,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Byadgi (Haveri),Haveri,Byadgi,FMR-EE1386DF,65000,33325.38,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Byadgi (Haveri),Haveri,Byadgi,FMR-2853EFF3,50000,42874.82,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Hangal (Haveri),Haveri,Hangal,FMR-43E307E8,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Hangal (Haveri),Haveri,Hangal,FMR-A6CC6C8D,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Hangal (Haveri),Haveri,Hangal,FMR-11BCFC01,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Hangal (Haveri),Haveri,Hangal,FMR-9364F115,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Hirekerur (Haveri),Haveri,Hirekerur,FMR-4DEBB755,50000,31685.7,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Hirekerur (Haveri),Haveri,Hirekerur,FMR-75678495,65000,27731.43,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Bellary Town (Bellary),Bellary,Bellary Town,FMR-BF5E9217,50000,23136.15,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Bellary Town (Bellary),Bellary,Bellary Town,FMR-C39E6B71,65000,42014.57,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Hospet (Bellary),Bellary,Hospet,FMR-30DFC20B,50000,34721.65,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Hospet (Bellary),Bellary,Hospet,FMR-B3472F2C,42000,27954.04,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Hospet (Bellary),Bellary,Hospet,FMR-BC02C9CF,50000,40945.34,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Hospet (Bellary),Bellary,Hospet,FMR-9E780EBD,65000,31667.52,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Sandur (Bellary),Bellary,Sandur,FMR-1341F1AD,50000,30148.09,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Siruguppa (Bellary),Bellary,Siruguppa,FMR-3D60C55A,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Siruguppa (Bellary),Bellary,Siruguppa,FMR-ACE9767B,50000,22495.84,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Siruguppa (Bellary),Bellary,Siruguppa,FMR-A584E02C,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Siruguppa (Bellary),Bellary,Siruguppa,FMR-235E3A8A,35000,24931.56,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Shorapur (Yadgir),Yadgir,Shorapur,FMR-2411C92D,65000,62604.35,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Shahapur (Yadgir),Yadgir,Shahapur,FMR-72ECA344,42000,21125.68,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Hunasagi (Yadgir),Yadgir,Hunasagi,FMR-51BE32E9,50000,44094.64,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Hunasagi (Yadgir),Yadgir,Hunasagi,FMR-D7201284,42000,39309.95,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Hunasagi (Yadgir),Yadgir,Hunasagi,FMR-B7D0B5B9,50000,20139.54,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Surapura (Yadgir),Yadgir,Surapura,FMR-891F1FBD,42000,34681.89,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Surapura (Yadgir),Yadgir,Surapura,FMR-74FC0E31,65000,41469.29,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Surapura (Yadgir),Yadgir,Surapura,FMR-FE6AD794,65000,56643.65,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Surapura (Yadgir),Yadgir,Surapura,FMR-17097E08,50000,45960.73,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Jamkhandi (Bagalkot),Bagalkot,Jamkhandi,FMR-1ED28C02,65000,59763.71,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Jamkhandi (Bagalkot),Bagalkot,Jamkhandi,FMR-81557F3E,65000,23010.75,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Jamkhandi (Bagalkot),Bagalkot,Jamkhandi,FMR-82869968,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Badami (Bagalkot),Bagalkot,Badami,FMR-9481DE3E,65000,25139.55,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Badami (Bagalkot),Bagalkot,Badami,FMR-C6C2B5B6,65000,29531.83,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Badami (Bagalkot),Bagalkot,Badami,FMR-F1ECB4ED,50000,22805.64,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Bilgi (Bagalkot),Bagalkot,Bilgi,FMR-C6FB6961,50000,34194.61,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Bilgi (Bagalkot),Bagalkot,Bilgi,FMR-5BEE904A,42000,22132.13,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Bilgi (Bagalkot),Bagalkot,Bilgi,FMR-D4F90BC9,65000,35613.45,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Bilgi (Bagalkot),Bagalkot,Bilgi,FMR-927354E2,35000,26951.11,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Mudhol (Bagalkot),Bagalkot,Mudhol,FMR-B8E119DF,35000,21953.11,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Mudhol (Bagalkot),Bagalkot,Mudhol,FMR-ECE15217,65000,36418.98,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Shiggaon (Haveri),Haveri,Shiggaon,FMR-5E27A65C,42000,25644.72,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Shiggaon (Haveri),Haveri,Shiggaon,FMR-1E44FC15,42000,29123.39,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Hagaribommanahalli (Bellary),Bellary,Hagaribommanahalli,FMR-2CF470DF,42000,23004.91,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Hagaribommanahalli (Bellary),Bellary,Hagaribommanahalli,FMR-8F27033A,65000,37322.38,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Hagaribommanahalli (Bellary),Bellary,Hagaribommanahalli,FMR-E12A61C7,42000,33824.34,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Kudligi (Bellary),Bellary,Kudligi,FMR-6A7548CF,50000,21089.84,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Kudligi (Bellary),Bellary,Kudligi,FMR-4B1D7A90,35000,24605.79,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Kudligi (Bellary),Bellary,Kudligi,FMR-0FCA10B4,65000,41919.94,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Kampli (Bellary),Bellary,Kampli,FMR-BFBE435F,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Humnabad (Bidar),Bidar,Humnabad,FMR-6B6A1E90,42000,40438.23,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Humnabad (Bidar),Bidar,Humnabad,FMR-F663C0CD,50000,39009.23,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Basavakalyan (Bidar),Bidar,Basavakalyan,FMR-2BBCA40C,35000,14432.58,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Basavakalyan (Bidar),Bidar,Basavakalyan,FMR-CB58D8C2,65000,37657.98,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Bhalki (Bidar),Bidar,Bhalki,FMR-ECE89D50,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Bhalki (Bidar),Bidar,Bhalki,FMR-1E68C8AE,35000,33392.72,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Bhalki (Bidar),Bidar,Bhalki,FMR-1A1FF14D,35000,11936.64,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Bhalki (Bidar),Bidar,Bhalki,FMR-A390ECA0,35000,10933.29,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Aurad (Bidar),Bidar,Aurad,FMR-3BBABF5D,65000,22892.03,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Hoovina Hadagali (Bellary),Bellary,Hoovina Hadagali,FMR-9505778E,65000,35443.24,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Gudur (Raichur),Raichur,Gudur,FMR-849E7756,50000,35955.46,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Gudur (Raichur),Raichur,Gudur,FMR-B6E92587,50000,37734.28,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Gudur (Raichur),Raichur,Gudur,FMR-1C718800,42000,32702.33,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Maski (Raichur),Raichur,Maski,FMR-253F6DA7,35000,33498.92,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Maski (Raichur),Raichur,Maski,FMR-D226AB57,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Maski (Raichur),Raichur,Maski,FMR-7091C34A,65000,37025.39,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Maski (Raichur),Raichur,Maski,FMR-D448F1B2,50000,49348.1,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Challakere (Chitradurga),Chitradurga,Challakere,FMR-121B64EF,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Challakere (Chitradurga),Chitradurga,Challakere,FMR-3CC5B852,65000,54407.15,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Challakere (Chitradurga),Chitradurga,Challakere,FMR-005BADC0,65000,38459.82,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Challakere (Chitradurga),Chitradurga,Challakere,FMR-1620EF91,65000,32674.21,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Hiriyur (Chitradurga),Chitradurga,Hiriyur,FMR-38DD3952,65000,59091.95,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Hiriyur (Chitradurga),Chitradurga,Hiriyur,FMR-12BE3994,35000,20999.6,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Hiriyur (Chitradurga),Chitradurga,Hiriyur,FMR-7B7F761A,35000,28840.59,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Holalkere (Chitradurga),Chitradurga,Holalkere,FMR-1A2BADC2,35000,15054.97,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Holalkere (Chitradurga),Chitradurga,Holalkere,FMR-3C695800,65000,29746.11,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Holalkere (Chitradurga),Chitradurga,Holalkere,FMR-897017E7,65000,24439.53,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Holalkere (Chitradurga),Chitradurga,Holalkere,FMR-C505EC0F,65000,55835.51,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Hosadurga (Chitradurga),Chitradurga,Hosadurga,FMR-012E32C2,65000,40838.98,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Molakalmuru (Chitradurga),Chitradurga,Molakalmuru,FMR-159D1ADB,50000,44507.83,Crop dried up due to prolonged moisture stress.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Molakalmuru (Chitradurga),Chitradurga,Molakalmuru,FMR-00E915BF,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Harihara (Davanagere),Davanagere,Harihara,FMR-8BE0139D,50000,37037.77,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Harihara (Davanagere),Davanagere,Harihara,FMR-EC7DCC73,50000,35196.5,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Channagiri (Davanagere),Davanagere,Channagiri,FMR-A1A1D16C,42000,41127.02,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Honnali (Davanagere),Davanagere,Honnali,FMR-6DA40E3A,35000,18484.48,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Honnali (Davanagere),Davanagere,Honnali,FMR-3579C5EC,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Honnali (Davanagere),Davanagere,Honnali,FMR-121A4770,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Jagalur (Davanagere),Davanagere,Jagalur,FMR-B6914087,42000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Jagalur (Davanagere),Davanagere,Jagalur,FMR-A870356E,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Jagalur (Davanagere),Davanagere,Jagalur,FMR-6994CE67,35000,11257.5,Crop dried up due to prolonged moisture stress.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Nyamathi (Davanagere),Davanagere,Nyamathi,FMR-98CA182F,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Nyamathi (Davanagere),Davanagere,Nyamathi,FMR-6BE09B61,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Tiptur (Tumakuru),Tumakuru,Tiptur,FMR-887589CB,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Tiptur (Tumakuru),Tumakuru,Tiptur,FMR-B97E9513,65000,52740.22,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Tiptur (Tumakuru),Tumakuru,Tiptur,FMR-089E69ED,42000,40718.66,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Kunigal (Tumakuru),Tumakuru,Kunigal,FMR-4ADC336A,35000,32374.9,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Kunigal (Tumakuru),Tumakuru,Kunigal,FMR-BB7EBCFC,65000,48725.86,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Kunigal (Tumakuru),Tumakuru,Kunigal,FMR-C8974418,65000,38957.97,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Kunigal (Tumakuru),Tumakuru,Kunigal,FMR-25FF34C4,50000,48818.04,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Madhugiri (Tumakuru),Tumakuru,Madhugiri,FMR-5BBE5A0B,65000,62887.94,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Madhugiri (Tumakuru),Tumakuru,Madhugiri,FMR-FA0527A8,35000,30748.57,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Madhugiri (Tumakuru),Tumakuru,Madhugiri,FMR-90C68FB6,42000,18261.4,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Madhugiri (Tumakuru),Tumakuru,Madhugiri,FMR-4FACBC3C,50000,40916.34,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Sira (Tumakuru),Tumakuru,Sira,FMR-6A8B8069,50000,23612.37,Severe drought during flowering stage destroyed crop.,MATCH_LOSS,Rice,Kharif
+Sira (Tumakuru),Tumakuru,Sira,FMR-ACDE0AB3,65000,31382.48,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Pavagada (Tumakuru),Tumakuru,Pavagada,FMR-67E4E740,65000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Pavagada (Tumakuru),Tumakuru,Pavagada,FMR-F3463AE9,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Pavagada (Tumakuru),Tumakuru,Pavagada,FMR-98C86425,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Gubbi (Tumakuru),Tumakuru,Gubbi,FMR-4A37909D,42000,30139.55,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Gubbi (Tumakuru),Tumakuru,Gubbi,FMR-BFC9B63F,65000,56090.28,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Gubbi (Tumakuru),Tumakuru,Gubbi,FMR-04FAADDD,35000,30510.89,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Gubbi (Tumakuru),Tumakuru,Gubbi,FMR-6D82E2E7,50000,35920.78,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-BBBAEC7C,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-3A879BB4,65000,50056.06,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-FF0660A7,50000,44299.58,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Turuvekere (Tumakuru),Tumakuru,Turuvekere,FMR-E6A5A276,65000,22407.38,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Chikkanayakanahalli (Tumakuru),Tumakuru,Chikkanayakanahalli,FMR-08D4E133,42000,18837.38,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Chikkanayakanahalli (Tumakuru),Tumakuru,Chikkanayakanahalli,FMR-147E6620,42000,31247.09,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Chikkanayakanahalli (Tumakuru),Tumakuru,Chikkanayakanahalli,FMR-DB8EEAB1,35000,33105.99,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Bhadravati (Shivamogga),Shivamogga,Bhadravati,FMR-038643A5,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Shikaripura (Shivamogga),Shivamogga,Shikaripura,FMR-CB887C76,42000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Soraba (Shivamogga),Shivamogga,Soraba,FMR-CB1544CD,50000,31497.42,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Sagar (Shivamogga),Shivamogga,Sagar,FMR-2F62FF61,65000,62001.54,"No rain for 30 days, total crop failure.",CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Sagar (Shivamogga),Shivamogga,Sagar,FMR-03643EF0,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Sagar (Shivamogga),Shivamogga,Sagar,FMR-CCE8C5A8,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Sagar (Shivamogga),Shivamogga,Sagar,FMR-6F8A0676,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Thirthahalli (Shivamogga),Shivamogga,Thirthahalli,FMR-8137D13F,42000,34480.66,Inadequate rainfall led to stunted growth and withering.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Thirthahalli (Shivamogga),Shivamogga,Thirthahalli,FMR-3D0DEB7C,42000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Thirthahalli (Shivamogga),Shivamogga,Thirthahalli,FMR-3996FF81,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Nanjangud (Mysuru),Mysuru,Nanjangud,FMR-12C74E0E,35000,21127.3,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Hunsur (Mysuru),Mysuru,Hunsur,FMR-5DEAEF46,35000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Piriyapatna (Mysuru),Mysuru,Piriyapatna,FMR-BD31B7D2,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Piriyapatna (Mysuru),Mysuru,Piriyapatna,FMR-8AE5C806,50000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Piriyapatna (Mysuru),Mysuru,Piriyapatna,FMR-E33A7726,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+T. Narasipura (Mysuru),Mysuru,T. Narasipura,FMR-30BE3936,65000,41247.09,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+T. Narasipura (Mysuru),Mysuru,T. Narasipura,FMR-456DBF6A,35000,11171.42,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+T. Narasipura (Mysuru),Mysuru,T. Narasipura,FMR-1C9F5F3E,42000,34194.85,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-B7337920,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-F0C75152,65000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-8EAFD85C,42000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Heggadadevankote (Mysuru),Mysuru,Heggadadevankote,FMR-EC3DD879,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Maddur (Mandya),Mandya,Maddur,FMR-F5C45FF6,42000,27411.26,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Malavalli (Mandya),Mandya,Malavalli,FMR-C8044310,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Malavalli (Mandya),Mandya,Malavalli,FMR-51E42D25,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Pandavapura (Mandya),Mandya,Pandavapura,FMR-3E82A477,35000,28989.93,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Krishnarajpet (Mandya),Mandya,Krishnarajpet,FMR-A9BBC449,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Krishnarajpet (Mandya),Mandya,Krishnarajpet,FMR-7C4E3224,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Kollegal (Chamarajanagar),Chamarajanagar,Kollegal,FMR-2B7A026C,65000,0.0,Slight waterlogging initially but crop recovered fully.,MATCH_HEALTHY,Rice,Kharif
+Kollegal (Chamarajanagar),Chamarajanagar,Kollegal,FMR-5A802058,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Gundlupet (Chamarajanagar),Chamarajanagar,Gundlupet,FMR-B2221753,50000,37414.05,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Gundlupet (Chamarajanagar),Chamarajanagar,Gundlupet,FMR-EB5C0E15,65000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Gundlupet (Chamarajanagar),Chamarajanagar,Gundlupet,FMR-4521D1F3,65000,57840.26,Severe drought during flowering stage destroyed crop.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Channarayapatna (Hassan),Hassan,Channarayapatna,FMR-4687F285,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Channarayapatna (Hassan),Hassan,Channarayapatna,FMR-82A0DAE3,65000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Channarayapatna (Hassan),Hassan,Channarayapatna,FMR-3C330F3F,65000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Channarayapatna (Hassan),Hassan,Channarayapatna,FMR-F37C0198,42000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Arsikere (Hassan),Hassan,Arsikere,FMR-95C7F0EB,42000,28947.11,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Arsikere (Hassan),Hassan,Arsikere,FMR-B61BA613,50000,48772.16,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Arsikere (Hassan),Hassan,Arsikere,FMR-07852515,50000,19346.04,Inadequate rainfall led to stunted growth and withering.,MATCH_LOSS,Rice,Kharif
+Holenarasipura (Hassan),Hassan,Holenarasipura,FMR-B5BDB322,50000,0.0,"Good rains, expecting normal yield.",MATCH_HEALTHY,Rice,Kharif
+Holenarasipura (Hassan),Hassan,Holenarasipura,FMR-3F077365,50000,45508.29,Crop dried up due to prolonged moisture stress.,CONTRADICT_REALITY_HEALTHY,Rice,Kharif
+Kadur (Chikkamagaluru),Chikkamagaluru,Kadur,FMR-E9230295,42000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Tarikere (Chikkamagaluru),Chikkamagaluru,Tarikere,FMR-64F0F0A9,35000,24125.03,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Gauribidanur (Chikkaballapur),Chikkaballapur,Gauribidanur,FMR-5915C398,42000,21656.6,Crop dried up due to prolonged moisture stress.,MATCH_LOSS,Rice,Kharif
+Gauribidanur (Chikkaballapur),Chikkaballapur,Gauribidanur,FMR-90A2A09A,50000,34350.32,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Gokak (Belagavi),Belagavi,Gokak,FMR-24A2EA61,35000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",MATCH_HEALTHY,Rice,Kharif
+Hubballi Rural (Dharwad),Dharwad,Hubballi Rural,FMR-E8134589,42000,29229.87,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Hubballi Rural (Dharwad),Dharwad,Hubballi Rural,FMR-F7F4970C,50000,0.0,"Crop is healthy, minor pest attack but yield unaffected.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Hubballi Rural (Dharwad),Dharwad,Hubballi Rural,FMR-73E77597,50000,27183.62,Fields submerged for 5 days due to flash floods.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Hubballi Rural (Dharwad),Dharwad,Hubballi Rural,FMR-B5D685CC,42000,14048.78,"Good rains, expecting normal yield.",CONTRADICT_REALITY_LOSS,Rice,Kharif
+Kalghatgi (Dharwad),Dharwad,Kalghatgi,FMR-059439AC,35000,28050.43,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Jewargi (Kalaburagi),Kalaburagi,Jewargi,FMR-9CCFE370,42000,16230.05,Slight waterlogging initially but crop recovered fully.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Chittapur (Kalaburagi),Kalaburagi,Chittapur,FMR-96515847,35000,28446.18,Heavy unseasonal rains washed away the topsoil and crop.,CONTRADICT_REALITY_LOSS,Rice,Kharif
+Shahabad (Kalaburagi),Kalaburagi,Shahabad,FMR-881CC8E0,50000,27992.02,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Shahabad (Kalaburagi),Kalaburagi,Shahabad,FMR-48762358,65000,22866.89,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Shahabad (Kalaburagi),Kalaburagi,Shahabad,FMR-5DA46C50,35000,22977.02,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
+Shahabad (Kalaburagi),Kalaburagi,Shahabad,FMR-254E9B35,65000,43188.51,"No rain for 30 days, total crop failure.",MATCH_LOSS,Rice,Kharif
