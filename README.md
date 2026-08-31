@@ -20,11 +20,14 @@ This is not a fraud determination system. It does not auto reject or auto approv
 **Satellite and weather signal extraction**
 Pulls Sentinel-2 NDVI and NDWI for the claimed plot across a before, during, and after window. Falls back to Sentinel-1 VV/VH backscatter when Sentinel-2 tiles are more than 50 percent cloudy, since optical imagery alone is unreliable under cloud cover. Pulls IMD rainfall data for the same district and window to check the claimed cause against actual weather.
 
-**Anomaly and duplicate detection**
-Claim narrative, structured metadata, and the extracted satellite and weather signals get combined into a feature representation per claim, then clustered with HDBSCAN to separate claims where the signals match the narrative from claims where they don't. A separate check compares plot geometry and metadata across claims to catch the same plot claimed twice under different names.
+**Anomaly detection (Deterministic Signal Comparison)**
+Instead of clustering (which requires massive production datasets), this MVP uses a strict deterministic rules engine. The claim narrative is directly evaluated against the retrieved satellite (NDVI/SAR delta) and weather signals (Rainfall delta). If a claim cites drought but the satellite imagery shows a healthy canopy and rainfall was normal, that's immediately flagged as a MISMATCH. Note: While HDBSCAN clustering and duplicate geometry checks were part of the initial exploratory scope, the MVP currently focuses exclusively on this 1-to-1 deterministic verification to ensure explainability.
 
 **Explanation layer**
-Flagged claims get a plain language explanation built from the deterministic numbers already computed, the NDVI delta, the rainfall delta, the cluster assignment. The language model only phrases these numbers into readable text. It doesn't reason over raw satellite data or make its own call on whether a claim is suspicious, that judgment comes from the clustering and threshold step upstream.
+Flagged claims get a plain language explanation built from the deterministic numbers already computed, the NDVI/SAR delta, and the rainfall delta. The language model (Groq) only phrases these numbers into readable text. It doesn't reason over raw satellite data or make its own call on whether a claim is suspicious; that judgment comes from the strict rules engine upstream.
+
+**The "Inconclusive" Baseline (Strict NO_DATA)**
+By design, the 4-signal `multimodal_verdict` evaluates Ground Truth (KSDMA/DES) alongside the remote sensing signals. Because we enforce a strict `NO_DATA` policy on unverified/mismatched Ground Truth data (like state-level averages or unlinked PDFs), the MVP currently outputs `INCONCLUSIVE` for all 100 rows at the 4-signal level. This is an architectural feature: the system refuses to hallucinate a verdict when 2 of 4 dimensions are missing. The primary actionable output for the demo is the independent 2-signal `fraud_label` (Satellite + Rainfall vs Claim), which successfully flags 52 Mismatches.
 
 **Human review**
 Every flag, its risk score, the triggering signals, and the explanation go to a reviewer queue. Nothing auto rejects or auto approves.
