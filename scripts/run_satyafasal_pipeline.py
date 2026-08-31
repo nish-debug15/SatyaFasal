@@ -344,9 +344,20 @@ def build_master_multimodal_dataset(
         claim_crop = None
         claim_season = None
         if df_pmfby is not None and not df_pmfby.empty:
-            p_match = df_pmfby[(df_pmfby["district"].str.lower() == dist.lower()) &
-                               ((df_pmfby["taluk"].str.lower() == tlk.lower()) | (df_pmfby["taluk"] == "")) &
-                               (df_pmfby["village_name"].str.lower() == vname.lower())]
+            p_match = df_pmfby[
+                (df_pmfby["district"].str.lower() == dist.lower()) &
+                (df_pmfby["taluk"].str.lower() == tlk.lower()) &
+                (df_pmfby["village_name"].str.lower() == vname.lower())
+            ]
+            
+            # Fallback to district-level aggregate (blank taluk) if exact match fails
+            if p_match.empty:
+                p_match = df_pmfby[
+                    (df_pmfby["district"].str.lower() == dist.lower()) &
+                    (df_pmfby["taluk"] == "") &
+                    (df_pmfby["village_name"].str.lower() == vname.lower())
+                ]
+                
             if not p_match.empty:
                 p_row = p_match.iloc[0]
                 record["pmfby_claims_reported"] = p_row.get("pmfby_claims_reported", "")
