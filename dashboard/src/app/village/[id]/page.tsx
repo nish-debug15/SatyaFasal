@@ -301,7 +301,7 @@ export default function VillageDetailPage() {
           {/* Full narrative */}
           <div className="bg-paper rounded p-5 border border-rule/50 text-ink text-sm leading-relaxed whitespace-pre-wrap">
             {data.llm_explanation ? (
-              data.llm_explanation
+              data.llm_explanation.replace(/\*\*/g, '')
             ) : (
               <span className="text-ink-disabled italic">No narrative explanation text generated for this claim.</span>
             )}

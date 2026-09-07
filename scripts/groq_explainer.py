@@ -42,6 +42,7 @@ CRITICAL RULES:
 4. DO NOT make a final determination. Only describe what the data shows in plain English.
 5. Keep the explanation strictly to 2-3 sentences.
 6. If NDVI is marked as unreliable, mention that SAR backscatter was used as the vegetation proxy instead.
+7. Use plain text only. Do NOT use markdown, asterisks, bold text, or lists.
 """
 
 GROQ_USER_PROMPT_TEMPLATE = """
