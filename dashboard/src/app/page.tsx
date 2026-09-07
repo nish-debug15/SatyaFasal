@@ -231,7 +231,7 @@ export default function Dashboard() {
                   <span className="px-2 py-0.5 rounded-sm text-[10px] font-medium bg-white border border-rule text-ink-secondary">
                     SIH 2026
                   </span>
-                  <span className="px-2 py-0.5 rounded-sm text-[10px] font-medium bg-white border border-flag-green/40 text-flag-green">
+                  <span className="px-2 py-0.5 rounded-sm text-[10px] font-medium bg-white border border-rule text-ink-secondary">
                     Supabase live
                   </span>
                 </div>
@@ -273,7 +273,7 @@ export default function Dashboard() {
               <div className="flex flex-wrap items-center gap-2">
                 <button
                   onClick={() => setFraudFilter('ALL')}
-                  className={`px-3 py-1 rounded text-xs font-medium transition-all border ${
+                  className={`px-3 py-1 rounded-sm text-xs font-medium transition-all border ${
                     fraudFilter === 'ALL'
                       ? 'bg-ink text-white border-ink'
                       : 'bg-white text-ink border-rule hover:bg-paper'
@@ -283,7 +283,7 @@ export default function Dashboard() {
                 </button>
                 <button
                   onClick={() => setFraudFilter('MISMATCH')}
-                  className={`px-3 py-1 rounded text-xs font-medium transition-all border flex items-center gap-1.5 ${
+                  className={`px-3 py-1 rounded-sm text-xs font-medium transition-all border flex items-center gap-1.5 ${
                     fraudFilter === 'MISMATCH'
                       ? 'bg-flag-red text-white border-flag-red'
                       : 'bg-white text-flag-red border-rule hover:border-flag-red/50'
@@ -294,7 +294,7 @@ export default function Dashboard() {
                 </button>
                 <button
                   onClick={() => setFraudFilter('INCONCLUSIVE')}
-                  className={`px-3 py-1 rounded text-xs font-medium transition-all border ${
+                  className={`px-3 py-1 rounded-sm text-xs font-medium transition-all border ${
                     fraudFilter === 'INCONCLUSIVE'
                       ? 'bg-flag-amber text-white border-flag-amber'
                       : 'bg-white text-flag-amber border-rule hover:border-flag-amber/50'
@@ -461,7 +461,7 @@ export default function Dashboard() {
                                   : 'text-flag-amber border-flag-amber/40'
                               }`}
                             >
-                              {row.fraud_confidence}
+                              {row.fraud_confidence.charAt(0).toUpperCase() + row.fraud_confidence.slice(1).toLowerCase()}
                             </span>
                           ) : (
                             <span className="text-ink-disabled">-</span>

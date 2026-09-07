@@ -210,7 +210,7 @@ export default function VillageDetailPage() {
                       : 'text-flag-amber border-flag-amber/40'
                   }`}
                 >
-                  {data.fraud_confidence || 'Low'} confidence
+                  {data.fraud_confidence ? data.fraud_confidence.charAt(0).toUpperCase() + data.fraud_confidence.slice(1).toLowerCase() : 'Low'} confidence
                 </span>
               </div>
             </div>
