@@ -255,11 +255,11 @@ export default function VillageDetailPage() {
                     AI verification analysis
                   </h2>
                   <span className="inline-flex items-center text-[11px] font-medium px-1.5 py-px rounded-sm border border-rule text-ink-secondary bg-white">
-                    Groq Llama-3-70B
+                    gpt-oss-20b
                   </span>
                 </div>
                 <p className="text-xs text-ink-secondary">
-                  Deterministic rule-engine thresholds phrased by Groq LLM layer
+                  Deterministic rule-engine thresholds phrased by GPT-OSS LLM layer
                 </p>
               </div>
             </div>

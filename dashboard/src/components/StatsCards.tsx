@@ -53,24 +53,24 @@ export default function StatsCards({
       {/* 1. Total Claims */}
       <div
         onClick={() => onFilterSelect && onFilterSelect('ALL')}
-        className={`group bg-white rounded-2xl p-5 border transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md ${
+        className={`group bg-surface rounded p-5 border transition-all cursor-pointer ${
           activeFilter === 'ALL'
-            ? 'border-blue-500 ring-2 ring-blue-500/20'
-            : 'border-slate-200/80 hover:border-slate-300'
+            ? 'border-ink ring-1 ring-ink'
+            : 'border-rule hover:border-ink-secondary'
         }`}
       >
         <div className="flex items-start justify-between">
           <div>
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Claims Evaluated</span>
-            <p className="mt-2 text-3xl font-extrabold text-slate-900 tracking-tight">{totalClaims}</p>
+            <span className="text-xs font-medium text-ink-secondary">Total claims evaluated</span>
+            <p className="mt-2 text-2xl font-bold font-data text-ink tracking-tight">{totalClaims}</p>
           </div>
-          <div className="p-2.5 bg-blue-50 rounded-xl text-blue-600 border border-blue-100 group-hover:scale-105 transition-transform">
-            <FileText className="w-5 h-5" />
+          <div className="p-2 border border-rule rounded text-ink-secondary bg-white">
+            <FileText className="w-4 h-4" />
           </div>
         </div>
-        <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
+        <div className="mt-4 flex items-center justify-between pt-3 border-t border-rule/50 text-xs text-ink-secondary">
           <span>Kharif 2024 Pilot</span>
-          <span className="font-semibold text-blue-600 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+          <span className="font-medium text-ink group-hover:underline flex items-center gap-0.5">
             View all <ArrowUpRight className="w-3 h-3" />
           </span>
         </div>
@@ -79,27 +79,26 @@ export default function StatsCards({
       {/* 2. Flagged Mismatch */}
       <div
         onClick={() => onFilterSelect && onFilterSelect('MISMATCH')}
-        className={`group bg-white rounded-2xl p-5 border transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md relative overflow-hidden ${
+        className={`group bg-surface rounded p-5 border transition-all cursor-pointer ${
           activeFilter === 'MISMATCH'
-            ? 'border-rose-500 ring-2 ring-rose-500/20'
-            : 'border-slate-200/80 hover:border-rose-200'
+            ? 'border-flag-red ring-1 ring-flag-red'
+            : 'border-rule hover:border-flag-red/50'
         }`}
       >
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-red-600" />
         <div className="flex items-start justify-between">
           <div>
-            <span className="text-xs font-semibold text-rose-600 uppercase tracking-wider">Flagged (Mismatch)</span>
-            <p className="mt-2 text-3xl font-extrabold text-slate-900 tracking-tight">{flaggedCount}</p>
+            <span className="text-xs font-medium text-flag-red">Flagged (mismatch)</span>
+            <p className="mt-2 text-2xl font-bold font-data text-ink tracking-tight">{flaggedCount}</p>
           </div>
-          <div className="p-2.5 bg-rose-50 rounded-xl text-rose-600 border border-rose-100 group-hover:scale-105 transition-transform">
-            <ShieldAlert className="w-5 h-5" />
+          <div className="p-2 border border-rule rounded text-ink-secondary bg-white">
+            <ShieldAlert className="w-4 h-4" />
           </div>
         </div>
-        <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
-          <span className="font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+        <div className="mt-4 flex items-center justify-between pt-3 border-t border-rule/50 text-xs text-ink-secondary">
+          <span className="font-medium font-data text-flag-red border border-flag-red/30 px-1.5 py-px rounded-sm bg-white">
             {flaggedPct}% of total
           </span>
-          <span className="font-semibold text-rose-600 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+          <span className="font-medium text-ink group-hover:underline flex items-center gap-0.5">
             Filter flagged <ArrowUpRight className="w-3 h-3" />
           </span>
         </div>
@@ -108,47 +107,45 @@ export default function StatsCards({
       {/* 3. Inconclusive Safeguard */}
       <div
         onClick={() => onFilterSelect && onFilterSelect('INCONCLUSIVE')}
-        className={`group bg-white rounded-2xl p-5 border transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md relative overflow-hidden ${
+        className={`group bg-surface rounded p-5 border transition-all cursor-pointer ${
           activeFilter === 'INCONCLUSIVE'
-            ? 'border-amber-500 ring-2 ring-amber-500/20'
-            : 'border-slate-200/80 hover:border-amber-200'
+            ? 'border-flag-amber ring-1 ring-flag-amber'
+            : 'border-rule hover:border-flag-amber/50'
         }`}
       >
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-yellow-500" />
         <div className="flex items-start justify-between">
           <div>
-            <span className="text-xs font-semibold text-amber-700 uppercase tracking-wider">Inconclusive (Safeguard)</span>
-            <p className="mt-2 text-3xl font-extrabold text-slate-900 tracking-tight">{inconclusiveCount}</p>
+            <span className="text-xs font-medium text-flag-amber">Inconclusive (safeguard)</span>
+            <p className="mt-2 text-2xl font-bold font-data text-ink tracking-tight">{inconclusiveCount}</p>
           </div>
-          <div className="p-2.5 bg-amber-50 rounded-xl text-amber-600 border border-amber-100 group-hover:scale-105 transition-transform">
-            <CircleAlert className="w-5 h-5" />
+          <div className="p-2 border border-rule rounded text-ink-secondary bg-white">
+            <CircleAlert className="w-4 h-4" />
           </div>
         </div>
-        <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
-          <span className="text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 font-medium">
-            {inconclusivePct}% Needs Survey
+        <div className="mt-4 flex items-center justify-between pt-3 border-t border-rule/50 text-xs text-ink-secondary">
+          <span className="font-medium font-data text-flag-amber border border-flag-amber/30 px-1.5 py-px rounded-sm bg-white">
+            {inconclusivePct}% needs survey
           </span>
-          <span className="font-semibold text-amber-700 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+          <span className="font-medium text-ink group-hover:underline flex items-center gap-0.5">
             Filter <ArrowUpRight className="w-3 h-3" />
           </span>
         </div>
       </div>
 
       {/* 4. Total Sum Insured */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-200 relative overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-600" />
+      <div className="bg-surface rounded p-5 border border-rule transition-all">
         <div className="flex items-start justify-between">
           <div>
-            <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">Total Sum Insured</span>
-            <p className="mt-2 text-2xl font-extrabold text-slate-900 tracking-tight">{formatCurrency(totalSumInsured)}</p>
+            <span className="text-xs font-medium text-ink-secondary">Total sum insured</span>
+            <p className="mt-2 text-2xl font-bold font-data text-ink tracking-tight">{formatCurrency(totalSumInsured)}</p>
           </div>
-          <div className="p-2.5 bg-emerald-50 rounded-xl text-emerald-600 border border-emerald-100">
-            <IndianRupee className="w-5 h-5" />
+          <div className="p-2 border border-rule rounded text-ink-secondary bg-white">
+            <IndianRupee className="w-4 h-4" />
           </div>
         </div>
-        <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
-          <span>Claims Total:</span>
-          <span className="font-bold text-slate-900">{formatCurrency(totalClaimAmount)}</span>
+        <div className="mt-4 flex items-center justify-between pt-3 border-t border-rule/50 text-xs text-ink-secondary">
+          <span>Claims total:</span>
+          <span className="font-bold font-data text-ink">{formatCurrency(totalClaimAmount)}</span>
         </div>
       </div>
     </div>

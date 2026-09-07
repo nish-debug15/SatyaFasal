@@ -181,11 +181,11 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-50">
-        <div className="flex flex-col items-center gap-3 p-8 bg-white rounded-2xl border border-slate-200 shadow-sm">
-          <Loader2 className="h-9 w-9 animate-spin text-blue-600" />
-          <p className="text-sm font-semibold text-slate-700">Loading PMFBY Claims Verification Matrix...</p>
-          <span className="text-xs text-slate-400">Fetching 101 Karnataka Pilot Villages</span>
+      <div className="flex h-screen items-center justify-center bg-paper">
+        <div className="flex flex-col items-center gap-3 p-8 bg-surface rounded border border-rule">
+          <Loader2 className="h-8 w-8 animate-spin text-ink-secondary" />
+          <p className="text-sm font-medium text-ink">Loading PMFBY claims register...</p>
+          <span className="text-xs text-ink-disabled">Fetching 101 Karnataka pilot villages</span>
         </div>
       </div>
     );
@@ -193,19 +193,19 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="p-8 bg-slate-50 min-h-screen flex items-center justify-center">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-sm border border-rose-200 p-6 text-center">
-          <div className="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-3">
-            <CircleAlert className="h-6 w-6" />
+      <div className="p-8 bg-paper min-h-screen flex items-center justify-center">
+        <div className="max-w-md w-full bg-surface rounded border border-rule p-6 text-center">
+          <div className="w-10 h-10 rounded bg-white border border-rule text-flag-red flex items-center justify-center mx-auto mb-3">
+            <CircleAlert className="h-5 w-5" />
           </div>
-          <h2 className="text-lg font-bold text-slate-900">Database Connection Error</h2>
-          <p className="mt-2 text-xs text-slate-500">{error}</p>
+          <h2 className="text-base font-semibold text-ink">Database connection error</h2>
+          <p className="mt-2 text-xs text-ink-secondary">{error}</p>
           <button
             onClick={fetchData}
-            className="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-xl transition-colors text-sm shadow-xs"
+            className="mt-5 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-ink hover:bg-ink/90 text-white font-medium rounded text-sm transition-colors"
           >
             <RefreshCw className="w-4 h-4" />
-            Retry Connection
+            Retry connection
           </button>
         </div>
       </div>
@@ -216,39 +216,38 @@ export default function Dashboard() {
   const inconclusiveCount = data.filter(r => (r.fraud_label || '').toUpperCase() === 'INCONCLUSIVE').length;
 
   return (
-    <div className="min-h-screen bg-slate-50/60 text-slate-900 pb-20">
+    <div className="min-h-screen bg-paper text-ink pb-20">
       {/* Top Header */}
-      <header className="bg-white border-b border-slate-200/80 sticky top-0 z-20 shadow-xs backdrop-blur-md bg-white/95">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="bg-surface border-b border-rule sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-                <Sparkles className="w-6 h-6" />
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded bg-white border border-rule flex items-center justify-center text-ink-secondary">
+                <Sparkles className="w-4 h-4" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">SatyaFasal</h1>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                  <h1 className="text-lg font-bold text-ink tracking-tight">SatyaFasal</h1>
+                  <span className="px-2 py-0.5 rounded-sm text-[10px] font-medium bg-white border border-rule text-ink-secondary">
                     SIH 2026
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Supabase Live
+                  <span className="px-2 py-0.5 rounded-sm text-[10px] font-medium bg-white border border-flag-green/40 text-flag-green">
+                    Supabase live
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 font-medium mt-0.5">
-                  Multimodal Satellite (SAR + NDVI) & Weather Verification Layer for PMFBY Claims • Karnataka Pilot
+                <p className="text-xs text-ink-secondary mt-0.5">
+                  Multimodal satellite & weather verification layer for PMFBY claims
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <button
                 onClick={exportToCSV}
-                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-ink bg-white hover:bg-paper border border-rule rounded transition-colors"
                 title="Download filtered claims to CSV"
               >
-                <Download className="w-3.5 h-3.5 text-slate-500" />
+                <Download className="w-3.5 h-3.5 text-ink-secondary" />
                 Export CSV
               </button>
             </div>
@@ -257,7 +256,7 @@ export default function Dashboard() {
       </header>
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-7">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {/* KPI Overview Cards */}
         <StatsCards
           data={data}
@@ -266,46 +265,46 @@ export default function Dashboard() {
         />
 
         {/* Claims Table Container */}
-        <div className="bg-white rounded-2xl shadow-xs border border-slate-200/80 overflow-hidden">
+        <div className="bg-surface rounded border border-rule overflow-hidden">
           {/* Table Controls & Filters Toolbar */}
-          <div className="p-5 border-b border-slate-200/80 bg-slate-50/50 space-y-4">
+          <div className="p-4 border-b border-rule/50 bg-paper/50 space-y-4">
             {/* Quick Filter Pills */}
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-2">
                 <button
                   onClick={() => setFraudFilter('ALL')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
+                  className={`px-3 py-1 rounded text-xs font-medium transition-all border ${
                     fraudFilter === 'ALL'
-                      ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
-                      : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100'
+                      ? 'bg-ink text-white border-ink'
+                      : 'bg-white text-ink border-rule hover:bg-paper'
                   }`}
                 >
-                  All Claims ({data.length})
+                  All claims ({data.length})
                 </button>
                 <button
                   onClick={() => setFraudFilter('MISMATCH')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border flex items-center gap-1.5 ${
+                  className={`px-3 py-1 rounded text-xs font-medium transition-all border flex items-center gap-1.5 ${
                     fraudFilter === 'MISMATCH'
-                      ? 'bg-rose-600 text-white border-rose-600 shadow-xs shadow-rose-500/20'
-                      : 'bg-white text-rose-700 border-rose-200 hover:bg-rose-50'
+                      ? 'bg-flag-red text-white border-flag-red'
+                      : 'bg-white text-flag-red border-rule hover:border-flag-red/50'
                   }`}
                 >
                   <ShieldAlert className="w-3.5 h-3.5" />
-                  Flagged (Mismatch) ({mismatchCount})
+                  Flagged mismatch ({mismatchCount})
                 </button>
                 <button
                   onClick={() => setFraudFilter('INCONCLUSIVE')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all border ${
+                  className={`px-3 py-1 rounded text-xs font-medium transition-all border ${
                     fraudFilter === 'INCONCLUSIVE'
-                      ? 'bg-amber-600 text-white border-amber-600 shadow-xs shadow-amber-500/20'
-                      : 'bg-white text-amber-800 border-amber-200 hover:bg-amber-50'
+                      ? 'bg-flag-amber text-white border-flag-amber'
+                      : 'bg-white text-flag-amber border-rule hover:border-flag-amber/50'
                   }`}
                 >
-                  Inconclusive Safeguard ({inconclusiveCount})
+                  Inconclusive safeguard ({inconclusiveCount})
                 </button>
               </div>
 
-              <div className="text-xs font-semibold text-slate-500">
+              <div className="text-xs font-medium text-ink-secondary">
                 Showing {filteredData.length} of {data.length} villages
               </div>
             </div>
@@ -313,27 +312,27 @@ export default function Dashboard() {
             {/* Search, District Filter, and Sort Controls */}
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between pt-1">
               <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-ink-disabled" />
                 <input
                   type="text"
-                  placeholder="Search village, district, taluk, or crop..."
-                  className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-xs font-medium placeholder:text-slate-400"
+                  placeholder="Search village, district, taluk..."
+                  className="w-full pl-8 pr-3 py-1.5 bg-white border border-rule rounded focus:ring-1 focus:ring-ink focus:border-ink outline-none transition-all text-xs font-medium placeholder:text-ink-disabled text-ink"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
 
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2">
                 {/* District Filter */}
-                <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-xl px-2.5 py-1 text-xs">
-                  <Filter className="w-3.5 h-3.5 text-slate-400" />
-                  <span className="text-slate-400 text-[11px]">District:</span>
+                <div className="flex items-center gap-1.5 bg-white border border-rule rounded px-2.5 py-1 text-xs">
+                  <Filter className="w-3.5 h-3.5 text-ink-secondary" />
+                  <span className="text-ink-secondary text-[11px]">District:</span>
                   <select
-                    className="bg-transparent font-medium text-slate-700 outline-none cursor-pointer text-xs"
+                    className="bg-transparent font-medium text-ink outline-none cursor-pointer text-xs"
                     value={districtFilter}
                     onChange={(e) => setDistrictFilter(e.target.value)}
                   >
-                    <option value="ALL">All Districts</option>
+                    <option value="ALL">All districts</option>
                     {districts.map(d => (
                       <option key={d} value={d}>
                         {d}
@@ -343,18 +342,18 @@ export default function Dashboard() {
                 </div>
 
                 {/* Sort Filter */}
-                <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-xl px-2.5 py-1 text-xs">
-                  <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
-                  <span className="text-slate-400 text-[11px]">Sort:</span>
+                <div className="flex items-center gap-1.5 bg-white border border-rule rounded px-2.5 py-1 text-xs">
+                  <ArrowUpDown className="w-3.5 h-3.5 text-ink-secondary" />
+                  <span className="text-ink-secondary text-[11px]">Sort:</span>
                   <select
-                    className="bg-transparent font-medium text-slate-700 outline-none cursor-pointer text-xs"
+                    className="bg-transparent font-medium text-ink outline-none cursor-pointer text-xs"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as any)}
                   >
-                    <option value="amount_desc">Claim Amount (High → Low)</option>
-                    <option value="amount_asc">Claim Amount (Low → High)</option>
-                    <option value="confidence">Confidence (High First)</option>
-                    <option value="village_asc">Village Name (A → Z)</option>
+                    <option value="amount_desc">Claim amount (high → low)</option>
+                    <option value="amount_asc">Claim amount (low → high)</option>
+                    <option value="confidence">Confidence (high first)</option>
+                    <option value="village_asc">Village name (A → Z)</option>
                   </select>
                 </div>
               </div>
@@ -363,36 +362,35 @@ export default function Dashboard() {
 
           {/* Table */}
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs whitespace-nowrap">
-              <thead className="bg-slate-100/70 border-b border-slate-200 text-slate-600 font-bold uppercase text-[11px] tracking-wider">
+            <table className="w-full text-left text-[13px] whitespace-nowrap">
+              <thead className="bg-paper border-b border-rule text-ink-secondary font-medium text-[11px]">
                 <tr>
-                  <th className="px-5 py-3.5">#</th>
-                  <th className="px-5 py-3.5">Village & Location</th>
-                  <th className="px-5 py-3.5">Crop & Season</th>
-                  <th className="px-5 py-3.5">Signal Label</th>
-                  <th className="px-5 py-3.5">Pipeline Verdict</th>
-                  <th className="px-5 py-3.5">Confidence</th>
-                  <th className="px-5 py-3.5">Claim Financials</th>
-                  <th className="px-5 py-3.5 text-right">Audit Action</th>
+                  <th className="px-4 py-3 font-medium">#</th>
+                  <th className="px-4 py-3 font-medium">Village & location</th>
+                  <th className="px-4 py-3 font-medium">Crop & season</th>
+                  <th className="px-4 py-3 font-medium">Signal label</th>
+                  <th className="px-4 py-3 font-medium">Pipeline verdict</th>
+                  <th className="px-4 py-3 font-medium">Confidence</th>
+                  <th className="px-4 py-3 font-medium">Claim financials</th>
+                  <th className="px-4 py-3 font-medium text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-rule/50">
                 {paginatedData.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="px-6 py-16 text-center text-slate-400">
+                    <td colSpan={8} className="px-6 py-16 text-center text-ink-disabled">
                       <div className="flex flex-col items-center justify-center max-w-xs mx-auto">
-                        <Search className="h-8 w-8 text-slate-300 mb-2" />
-                        <p className="font-semibold text-slate-700 text-sm">No matching claims found</p>
-                        <p className="text-xs text-slate-400 mt-1">Try loosening your search query or reset filters.</p>
+                        <Search className="h-6 w-6 text-rule mb-2" />
+                        <p className="font-medium text-ink text-sm">No matching claims found</p>
                         <button
                           onClick={() => {
                             setSearch('');
                             setFraudFilter('ALL');
                             setDistrictFilter('ALL');
                           }}
-                          className="mt-3 px-3 py-1.5 text-xs font-semibold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors"
+                          className="mt-3 px-3 py-1 text-xs font-medium text-ink bg-white border border-rule rounded hover:bg-paper transition-colors"
                         >
-                          Clear Filters
+                          Clear filters
                         </button>
                       </div>
                     </td>
@@ -408,35 +406,35 @@ export default function Dashboard() {
                     return (
                       <tr
                         key={row.id}
-                        className={`transition-colors duration-150 group ${
+                        className={`transition-colors duration-150 group bg-white ${
                           isMismatch
-                            ? 'bg-rose-50/30 hover:bg-rose-50/60 border-l-4 border-l-rose-500'
-                            : 'hover:bg-slate-50/80 even:bg-slate-50/30 border-l-4 border-l-transparent'
+                            ? 'hover:bg-flag-red/5 border-l-[3px] border-l-flag-red'
+                            : 'hover:bg-paper border-l-[3px] border-l-transparent'
                         }`}
                       >
                         {/* 1. Row index */}
-                        <td className="px-5 py-3.5 text-slate-400 font-medium">{rowNumber}</td>
+                        <td className="px-4 py-3 text-ink-disabled font-data">{rowNumber}</td>
 
                         {/* 2. Village & District */}
-                        <td className="px-5 py-3.5">
+                        <td className="px-4 py-3">
                           <div className="flex items-center gap-2">
-                            <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                            <MapPin className="w-3.5 h-3.5 text-ink-disabled shrink-0" />
                             <div>
-                              <div className="font-bold text-slate-900 text-xs">{row.village_name || '-'}</div>
-                              <div className="text-[11px] text-slate-500">
-                                {row.taluk}, <span className="font-medium text-slate-600">{row.district}</span>
+                              <div className="font-semibold text-ink text-xs">{row.village_name || '-'}</div>
+                              <div className="text-[11px] text-ink-secondary">
+                                {row.taluk}, {row.district}
                               </div>
                             </div>
                           </div>
                         </td>
 
                         {/* 3. Crop & Season */}
-                        <td className="px-5 py-3.5">
-                          <div className="flex items-center gap-1.5">
-                            <Wheat className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-2">
+                            <Wheat className="w-3.5 h-3.5 text-ink-disabled shrink-0" />
                             <div>
-                              <div className="font-semibold text-slate-800">{row.crop_name || 'Rice'}</div>
-                              <div className="text-[10px] text-slate-400">
+                              <div className="font-medium text-ink text-xs">{row.crop_name || 'Rice'}</div>
+                              <div className="text-[11px] text-ink-secondary">
                                 {row.season || 'Kharif'} {row.year || '2024'}
                               </div>
                             </div>
@@ -444,48 +442,40 @@ export default function Dashboard() {
                         </td>
 
                         {/* 4. Signal Label */}
-                        <td className="px-5 py-3.5">
-                          <VerdictBadge verdict={row.fraud_label} size="sm" />
+                        <td className="px-4 py-3">
+                          <VerdictBadge verdict={row.fraud_label} size="md" />
                         </td>
 
                         {/* 5. Pipeline Verdict */}
-                        <td className="px-5 py-3.5">
+                        <td className="px-4 py-3">
                           <VerdictBadge verdict={row.multimodal_verdict} size="sm" />
                         </td>
 
                         {/* 6. Confidence */}
-                        <td className="px-5 py-3.5">
+                        <td className="px-4 py-3">
                           {row.fraud_confidence ? (
                             <span
-                              className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide border uppercase ${
+                              className={`px-1.5 py-px rounded-sm text-[11px] font-medium border bg-white ${
                                 row.fraud_confidence.toLowerCase() === 'high'
-                                  ? 'bg-rose-100 text-rose-800 border-rose-300'
-                                  : 'bg-amber-100 text-amber-800 border-amber-300'
+                                  ? 'text-flag-red border-flag-red/40'
+                                  : 'text-flag-amber border-flag-amber/40'
                               }`}
                             >
                               {row.fraud_confidence}
                             </span>
                           ) : (
-                            <span className="text-slate-300">-</span>
+                            <span className="text-ink-disabled">-</span>
                           )}
                         </td>
 
-                        {/* 7. Claim Financials & Mini Ratio Bar */}
-                        <td className="px-5 py-3.5">
+                        {/* 7. Claim Financials */}
+                        <td className="px-4 py-3">
                           <div>
-                            <div className="font-bold text-slate-900 text-xs">
+                            <div className="font-medium font-data text-ink text-[13px]">
                               {formatCurrency(row.pmfby_claim_amount_inr)}
                             </div>
-                            <div className="flex items-center gap-1.5 mt-1">
-                              <div className="w-16 bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                                <div
-                                  className={`h-full rounded-full ${
-                                    ratio > 80 ? 'bg-rose-500' : 'bg-blue-500'
-                                  }`}
-                                  style={{ width: `${ratio}%` }}
-                                />
-                              </div>
-                              <span className="text-[10px] text-slate-400 font-medium">
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              <span className="text-[10px] text-ink-secondary font-data">
                                 {ratio.toFixed(0)}% of SI
                               </span>
                             </div>
@@ -493,17 +483,17 @@ export default function Dashboard() {
                         </td>
 
                         {/* 8. Inspect Detail Action */}
-                        <td className="px-5 py-3.5 text-right">
+                        <td className="px-4 py-3 text-right">
                           <Link
                             href={`/village/${row.id}`}
-                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-semibold text-xs transition-all ${
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-medium transition-all ${
                               isMismatch
-                                ? 'bg-rose-600 hover:bg-rose-700 text-white shadow-xs shadow-rose-500/20'
-                                : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
+                                ? 'bg-flag-red hover:bg-flag-red/90 text-white'
+                                : 'bg-white hover:bg-paper border border-rule text-ink'
                             }`}
                           >
                             <span>Inspect</span>
-                            <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                            <ExternalLink className="w-3 h-3" />
                           </Link>
                         </td>
                       </tr>
@@ -515,37 +505,37 @@ export default function Dashboard() {
           </div>
 
           {/* Pagination Controls */}
-          <div className="px-6 py-4 border-t border-slate-200/80 bg-slate-50/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-            <div className="text-slate-500">
+          <div className="px-4 py-3 border-t border-rule/50 bg-paper/50 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div className="text-ink-secondary">
               Showing{' '}
-              <span className="font-bold text-slate-800">
+              <span className="font-medium font-data text-ink">
                 {filteredData.length > 0 ? (page - 1) * rowsPerPage + 1 : 0}
               </span>{' '}
               to{' '}
-              <span className="font-bold text-slate-800">
+              <span className="font-medium font-data text-ink">
                 {Math.min(page * rowsPerPage, filteredData.length)}
               </span>{' '}
-              of <span className="font-bold text-slate-800">{filteredData.length}</span> claims
+              of <span className="font-medium font-data text-ink">{filteredData.length}</span> claims
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setPage(p => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="inline-flex items-center gap-1 px-3 py-1.5 border border-slate-200 bg-white rounded-xl text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-xs font-medium"
+                className="inline-flex items-center gap-1 px-2.5 py-1 border border-rule bg-white rounded text-ink hover:bg-paper disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
               >
                 <ChevronLeft className="h-3.5 w-3.5" />
                 Previous
               </button>
 
-              <span className="px-3 py-1 text-slate-600 font-semibold">
+              <span className="px-2 py-1 text-ink-secondary font-medium font-data">
                 Page {page} of {totalPages}
               </span>
 
               <button
                 onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages || totalPages === 0}
-                className="inline-flex items-center gap-1 px-3 py-1.5 border border-slate-200 bg-white rounded-xl text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-xs font-medium"
+                className="inline-flex items-center gap-1 px-2.5 py-1 border border-rule bg-white rounded text-ink hover:bg-paper disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
               >
                 Next
                 <ChevronRight className="h-3.5 w-3.5" />
