@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Colour Tokens ── */
+  --ink: #1C1917;
+  --paper: #F7F6F3;
+  --rule: #D6D3CE;
+  --flag-red: #B91C1C;
+  --flag-amber: #A16207;
+  --flag-green: #15803D;
+
+  /* Derived neutrals */
+  --ink-secondary: #7A7672;
+  --ink-disabled: #B5B2AE;
+  --surface: #FFFFFF;
+
+  /* ── Backgrounds ── */
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-rule: var(--rule);
+  --color-flag-red: var(--flag-red);
+  --color-flag-amber: var(--flag-amber);
+  --color-flag-green: var(--flag-green);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-disabled: var(--ink-disabled);
+  --color-surface: var(--surface);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-data: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Tabular figures for data font ── */
+.font-data {
+  font-family: var(--font-data), system-ui, sans-serif;
+  font-feature-settings: 'tnum' 1;
+  font-variant-numeric: tabular-nums;
 }

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { HelpCircle, CheckCircle2, XCircle, AlertCircle, MinusCircle } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 
 export interface SignalCardProps {
   title: string;
@@ -14,6 +14,13 @@ export interface SignalCardProps {
   subtitle?: string;
 }
 
+const STATUS_CONFIG: Record<string, { label: string; borderColor: string; textColor: string }> = {
+  supports:     { label: 'Supports loss',       borderColor: 'border-l-flag-green',  textColor: 'text-flag-green border-flag-green/40' },
+  contradicts:  { label: 'Contradicts claim',    borderColor: 'border-l-flag-red',    textColor: 'text-flag-red border-flag-red/40' },
+  inconclusive: { label: 'Inconclusive',         borderColor: 'border-l-flag-amber',  textColor: 'text-flag-amber border-flag-amber/40' },
+  unavailable:  { label: 'No data (safeguard)',  borderColor: 'border-l-rule',         textColor: 'text-ink-secondary border-rule' },
+};
+
 export default function SignalCard({
   title,
   status,
@@ -24,74 +31,42 @@ export default function SignalCard({
   subtitle
 }: SignalCardProps) {
   const Icon = IconComponent || HelpCircle;
-
-  let borderClasses = 'border-slate-200 border-l-slate-400';
-  let badgeText = 'UNAVAILABLE';
-  let badgeClasses = 'bg-slate-100 text-slate-600 border-slate-200';
-  let StatusIcon = MinusCircle;
-  let iconBg = 'bg-slate-100 text-slate-600';
-
-  if (status === 'supports') {
-    borderClasses = 'border-slate-200 border-l-emerald-500';
-    badgeText = 'SUPPORTS LOSS';
-    badgeClasses = 'bg-emerald-50 text-emerald-700 border-emerald-200';
-    StatusIcon = CheckCircle2;
-    iconBg = 'bg-emerald-50 text-emerald-600 border-emerald-200';
-  } else if (status === 'contradicts') {
-    borderClasses = 'border-slate-200 border-l-rose-500';
-    badgeText = 'CONTRADICTS CLAIM';
-    badgeClasses = 'bg-rose-50 text-rose-700 border-rose-200 font-bold';
-    StatusIcon = XCircle;
-    iconBg = 'bg-rose-50 text-rose-600 border-rose-200';
-  } else if (status === 'inconclusive') {
-    borderClasses = 'border-slate-200 border-l-amber-500';
-    badgeText = 'INCONCLUSIVE';
-    badgeClasses = 'bg-amber-50 text-amber-800 border-amber-200';
-    StatusIcon = AlertCircle;
-    iconBg = 'bg-amber-50 text-amber-600 border-amber-200';
-  } else if (status === 'unavailable') {
-    borderClasses = 'border-slate-200 border-l-slate-300';
-    badgeText = 'NO DATA (SAFEGUARD)';
-    badgeClasses = 'bg-slate-100 text-slate-500 border-slate-200';
-    StatusIcon = MinusCircle;
-    iconBg = 'bg-slate-100 text-slate-400';
-  }
+  const config = STATUS_CONFIG[status] || STATUS_CONFIG.unavailable;
 
   return (
     <div
-      className={`rounded-xl shadow-xs border bg-white border-l-4 ${borderClasses} p-5 flex flex-col justify-between transition-all duration-150 hover:shadow-sm`}
+      className={`rounded bg-white border border-rule border-l-[3px] ${config.borderColor} p-6 flex flex-col justify-between`}
     >
       <div>
-        {/* Top bar with Icon and Status Badge */}
+        {/* Header: icon, title, status badge */}
         <div className="flex items-start justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2.5">
-            <div className={`p-2 rounded-lg border ${iconBg}`}>
-              <Icon className="w-4 h-4" />
-            </div>
+          <div className="flex items-center gap-2">
+            <Icon className="w-4 h-4 text-ink-secondary shrink-0" />
             <div>
-              <h3 className="font-bold text-sm text-slate-900">{title}</h3>
-              {subtitle && <p className="text-[11px] text-slate-400">{subtitle}</p>}
+              <h3 className="font-semibold text-sm text-ink">{title}</h3>
+              {subtitle && <p className="text-[11px] text-ink-secondary">{subtitle}</p>}
             </div>
           </div>
 
           <span
-            className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border tracking-wide uppercase ${badgeClasses}`}
+            className={`inline-flex items-center text-[11px] font-medium px-1.5 py-px rounded-sm border bg-white whitespace-nowrap ${config.textColor}`}
           >
-            <StatusIcon className="w-3 h-3" />
-            <span>{badgeText}</span>
+            {config.label}
           </span>
         </div>
 
-        {/* Content & Metrics */}
+        {/* Value & detail */}
         {value && (
-          <p className={`text-lg font-bold mt-1 ${status === 'unavailable' ? 'text-slate-400' : 'text-slate-900'}`}>
+          <p className={`font-data text-lg font-bold mt-1 ${status === 'unavailable' ? 'text-ink-disabled' : 'text-ink'}`}>
             {value}
           </p>
         )}
-        {detail && <p className="text-xs text-slate-500 mt-1 leading-relaxed">{detail}</p>}
+        {detail && <p className="text-xs text-ink-secondary mt-1 leading-relaxed">{detail}</p>}
       </div>
 
-      <div className="mt-3 pt-3 border-t border-slate-100">{children}</div>
+      {children && (
+        <div className="mt-3 pt-3 border-t border-rule/50">{children}</div>
+      )}
     </div>
   );
 }

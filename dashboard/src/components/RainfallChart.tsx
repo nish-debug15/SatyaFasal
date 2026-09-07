@@ -29,9 +29,9 @@ export default function RainfallChart({
 }: RainfallChartProps) {
   if (actualRainfall === null || normalRainfall === null) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50 rounded-xl border border-slate-200 p-6 min-h-[220px]">
-        <CloudRain className="w-8 h-8 text-slate-300 mb-2" />
-        <p className="text-xs text-slate-500 font-medium">No rainfall data available for this window</p>
+      <div className="w-full h-full flex flex-col items-center justify-center bg-paper rounded border border-rule p-6 min-h-[220px]">
+        <CloudRain className="w-8 h-8 text-ink-disabled mb-2" />
+        <p className="text-xs text-ink-secondary font-medium">No rainfall data available for this window</p>
       </div>
     );
   }
@@ -55,64 +55,64 @@ export default function RainfallChart({
   ];
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-xl border border-slate-200/80 p-5 shadow-xs">
+    <div className="flex flex-col h-full bg-surface rounded border border-rule p-5">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
+      <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-rule/50">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-sky-50 text-sky-600 border border-sky-200">
+          <div className="p-1.5 rounded bg-white text-ink-secondary border border-rule">
             <CloudRain className="w-4 h-4" />
           </div>
           <div>
-            <h4 className="text-sm font-bold text-slate-900">Rainfall Drop & Deficit</h4>
-            <p className="text-xs text-slate-500">Open-Meteo & IMD Precipitation Record</p>
+            <h4 className="text-sm font-semibold text-ink">Rainfall Drop & Deficit</h4>
+            <p className="text-xs text-ink-secondary">Open-Meteo & IMD Precipitation Record</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-50/80 border border-sky-200 text-sky-800 text-[11px] font-semibold">
-          <Droplets className="w-3 h-3 text-sky-600" />
-          <span>Total: {actualRainfall.toFixed(0)} mm</span>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-white border border-rule text-ink-secondary text-[11px] font-medium">
+          <Droplets className="w-3 h-3 text-ink-secondary" />
+          <span>Total: <span className="font-bold font-data text-ink">{actualRainfall.toFixed(0)} mm</span></span>
         </div>
       </div>
 
       {/* Deficit Callout Banner */}
-      <div className="my-3 p-3 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-between">
+      <div className="my-3 p-3 rounded bg-paper border border-rule/50 flex items-center justify-between">
         <div className="flex items-center gap-2">
           {deficitPct !== null ? (
             deficitPct > 0 ? (
-              <TrendingDown className="w-4 h-4 text-rose-600" />
+              <TrendingDown className="w-4 h-4 text-flag-red" />
             ) : (
-              <TrendingUp className="w-4 h-4 text-sky-600" />
+              <TrendingUp className="w-4 h-4 text-ink-secondary" />
             )
           ) : null}
-          <span className="text-xs text-slate-600">Rainfall Deviation:</span>
-          <span className="text-xs font-bold text-slate-900">
+          <span className="text-xs text-ink-secondary">Rainfall Deviation:</span>
+          <span className="text-xs font-bold font-data text-ink">
             {deficitPct !== null ? `${deficitPct > 0 ? '-' : '+'}${Math.abs(deficitPct).toFixed(1)}%` : 'N/A'}
           </span>
         </div>
 
         <span
-          className={`text-[11px] font-bold px-2 py-0.5 rounded-md border inline-flex items-center gap-1 ${
+          className={`text-[11px] font-medium px-2 py-0.5 rounded-sm border inline-flex items-center gap-1 ${
             isDrought
-              ? 'bg-amber-50 text-amber-800 border-amber-200'
+              ? 'text-flag-amber border-flag-amber/40 bg-white'
               : isExcess
-              ? 'bg-rose-50 text-rose-700 border-rose-200'
-              : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              ? 'text-flag-red border-flag-red/40 bg-white'
+              : 'text-flag-green border-flag-green/40 bg-white'
           }`}
         >
           {isDrought ? (
             <>
               <AlertTriangle className="w-3 h-3" />
-              <span>DROUGHT DEFICIT DETECTED</span>
+              <span>Drought deficit detected</span>
             </>
           ) : isExcess ? (
             <>
               <Droplets className="w-3 h-3" />
-              <span>SURPLUS RAIN (CONTRADICTS DROUGHT)</span>
+              <span>Surplus rain (contradicts drought)</span>
             </>
           ) : (
             <>
               <CheckCircle2 className="w-3 h-3" />
-              <span>NORMAL RAINFALL RANGE</span>
+              <span>Normal rainfall range</span>
             </>
           )}
         </span>
@@ -122,25 +122,25 @@ export default function RainfallChart({
       <div className="w-full h-44 mt-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 15, right: 20, left: -10, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-            <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} />
-            <YAxis axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 11 }} unit=" mm" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#D6D3CE" />
+            <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#7A7672', fontSize: 11 }} />
+            <YAxis axisLine={false} tickLine={false} tick={{ fill: '#7A7672', fontSize: 11 }} unit=" mm" />
             <Tooltip
               cursor={{ fill: '#f8fafc' }}
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   const item = payload[0].payload;
                   return (
-                    <div className="bg-slate-900 text-white px-3 py-2 rounded-lg text-xs shadow-lg">
-                      <p className="font-semibold text-slate-200">{item.name}</p>
-                      <p className="text-sky-400 font-bold mt-0.5">{item.display}</p>
+                    <div className="bg-slate-900 text-white px-3 py-2 rounded text-xs shadow-lg">
+                      <p className="font-medium text-slate-200">{item.name}</p>
+                      <p className="text-sky-400 font-bold font-data mt-0.5">{item.display}</p>
                     </div>
                   );
                 }
                 return null;
               }}
             />
-            <Bar dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={56}>
+            <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={56}>
               <Cell fill={isExcess ? '#0284c7' : '#38bdf8'} />
               <Cell fill="#94a3b8" />
             </Bar>
@@ -149,8 +149,8 @@ export default function RainfallChart({
       </div>
 
       {/* Explainer */}
-      <p className="mt-3 text-[11px] text-slate-500 leading-relaxed">
-        <span className="font-semibold text-slate-700">Weather Logic:</span> Claims citing drought loss require a verified rainfall deficit &gt; 20% against the 10-year IMD district normal. Surplus or normal rainfall contradicts drought loss claims.
+      <p className="mt-3 text-[11px] text-ink-secondary leading-relaxed">
+        <span className="font-medium text-ink">Weather Logic:</span> Claims citing drought loss require a verified rainfall deficit &gt; 20% against the 10-year IMD district normal. Surplus or normal rainfall contradicts drought loss claims.
       </p>
     </div>
   );

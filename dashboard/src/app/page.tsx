@@ -445,12 +445,12 @@ export default function Dashboard() {
 
                         {/* 4. Signal Label */}
                         <td className="px-5 py-3.5">
-                          <VerdictBadge verdict={row.fraud_label} size="sm" pulse={isMismatch} />
+                          <VerdictBadge verdict={row.fraud_label} size="sm" />
                         </td>
 
                         {/* 5. Pipeline Verdict */}
                         <td className="px-5 py-3.5">
-                          <VerdictBadge verdict={row.multimodal_verdict} size="xs" />
+                          <VerdictBadge verdict={row.multimodal_verdict} size="sm" />
                         </td>
 
                         {/* 6. Confidence */}
