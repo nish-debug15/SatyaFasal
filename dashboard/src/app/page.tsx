@@ -228,12 +228,6 @@ export default function Dashboard() {
               <div>
                 <div className="flex items-center gap-2">
                   <h1 className="text-lg font-bold text-ink tracking-tight">SatyaFasal</h1>
-                  <span className="px-2 py-0.5 rounded-sm text-[10px] font-medium bg-white border border-rule text-ink-secondary">
-                    SIH 2026
-                  </span>
-                  <span className="px-2 py-0.5 rounded-sm text-[10px] font-medium bg-white border border-rule text-ink-secondary">
-                    Supabase live
-                  </span>
                 </div>
                 <p className="text-xs text-ink-secondary mt-0.5">
                   Multimodal satellite & weather verification layer for PMFBY claims
