@@ -44,7 +44,7 @@ Every flag, its risk score, the triggering signals, and the explanation go to a 
 
 ## MVP Scope
 
-Demo built on Karnataka, using the Bhoomi cadastral layer, with plot boundaries verified to under 5 metre accuracy for the sample set. Runs on a curated set of real plot locations with a mix of synthetic claim narratives, some matching the satellite record and some deliberately mismatched, plus a small set of overlapping plot entries to demo duplicate detection live.
+Demo built on Karnataka, using the Bhoomi cadastral layer, with plot boundaries verified to under 5 metre accuracy for the sample set. Runs on a curated set of real plot locations with a mix of synthetic claim narratives, some matching the satellite record and some deliberately mismatched. Duplicate claim detection (geometry-based) is out of scope for this MVP and is not demoed; it is listed explicitly as future scope in the PRD.
 
 ## Known Limitations & Strict Data Integrity
 

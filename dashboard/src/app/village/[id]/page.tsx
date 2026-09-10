@@ -317,7 +317,7 @@ export default function VillageDetailPage() {
                 : 'Check local tehsil rainfall station records before releasing payout.'}
             </span>
             <span className="text-[11px] text-ink-disabled">
-              Deterministic threshold: ΔSAR &lt; −1.5 dB | Rainfall deficit &gt; 20%
+              Deterministic threshold: ΔSAR &lt; −1.5 dB | Rainfall deficit &gt; 25%
             </span>
           </div>
         </section>
